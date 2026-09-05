@@ -3,235 +3,862 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Human vs. AI: A Comparative Study of Writing Effectiveness</title>
+    <meta name="description" content="Human vs. AI: A Comparative Study of Writing Effectiveness among Mapúa University Students by Iñaki Carmelo Sanderz E. Castasus.">
+    <title>Visual Learning | Human vs. AI Academic Study</title>
+
     <style>
-        :root {
-            --primary: #dd3092;       /* Deep crimson/cardinal */
-            --secondary: #2b2d42;     /* Slate dark */
-            --accent: #f4f6f8;        /* Light background tint */
-            --border-color: #e5e7eb;  /* Border gray */
-            --text: #374151;          /* Charcoal text */
+        /* =========================================================
+           DESIGN TOKENS & RESET
+        ========================================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
 
-        * {
-            box-sizing: border-box;
+        :root {
+            --ink: #172033;
+            --muted: #5f6b7a;
+            --surface: #f5f7fa;
+            --surface-tint: #fff8e9;
+            --accent: #c8c221;
+            --accent-dark: #af8844;
+            --line: #dfe4ea;
+            --white: #ffffff;
+            --max-width: 1180px;
+            --radius: 16px;
+            --shadow: 0 16px 40px rgba(23, 32, 51, 0.07);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: var(--white);
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        /* =========================================================
+           ACCESSIBILITY
+        ========================================================= */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            z-index: 999;
+            padding: 0.75rem 1rem;
+            background: var(--ink);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 0 0 8px 8px;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* =========================================================
+           LAYOUT & TYPOGRAPHY
+        ========================================================= */
+        .container {
+            width: min(var(--max-width), calc(100% - 2.5rem));
+            margin-inline: auto;
+        }
+
+        .section {
+            padding: clamp(3.5rem, 7vw, 6rem) 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 0 1rem;
+            color: var(--accent-dark);
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 24px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        h1, h2, h3, h4 {
+            margin-top: 0;
+            color: var(--ink);
+            line-height: 1.15;
+            letter-spacing: -0.035em;
+        }
+
+        h1 {
+            font-size: clamp(2.3rem, 5vw, 4rem);
+            margin-bottom: 1.25rem;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .section-heading {
+            max-width: 760px;
+            margin-bottom: 2.75rem;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.15rem;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .brand span {
+            color: var(--accent-dark);
+        }
+
+        .nav-list {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+            list-style: none;
             margin: 0;
             padding: 0;
         }
 
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: #f8fafc;
-            color: var(--text);
-            line-height: 1.7;
-            padding: 2rem 1rem;
+        .nav-list a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 650;
+            color: #465162;
+            transition: color 150ms ease;
         }
 
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
+        .nav-list a:hover {
+            color: var(--ink);
         }
 
-        /* Typography */
-        h1 {
-            color: var(--primary);
-            font-size: 2rem;
-            line-height: 1.3;
-            margin-bottom: 0.75rem;
+        /* =========================================================
+           HERO
+        ========================================================= */
+        .hero {
+            background: linear-gradient(135deg, #f7f8fa 0%, #ffffff 55%, #fff8e9 100%);
+            padding: clamp(3.5rem, 8vw, 6.5rem) 0;
+            border-bottom: 1px solid var(--line);
         }
 
-        .author-meta {
-            font-size: 1rem;
-            color: #6b7280;
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        h2 {
-            color: var(--secondary);
-            font-size: 1.35rem;
-            margin-top: 2rem;
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.35rem;
-            border-bottom: 2px solid var(--accent);
-            display: flex;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
             align-items: center;
+            gap: clamp(2rem, 5vw, 4.5rem);
         }
 
-        h3 {
-            color: var(--primary);
-            font-size: 1.1rem;
-            margin-top: 1.25rem;
-            margin-bottom: 0.5rem;
+        .hero-copy {
+            font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+            color: var(--muted);
+            margin-bottom: 1.75rem;
         }
 
-        h4 {
-            color: var(--secondary);
-            font-size: 1rem;
-            margin-top: 1rem;
-            margin-bottom: 0.25rem;
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            padding-top: 1.25rem;
         }
 
-        p {
+        .hero-meta strong {
+            color: var(--ink);
+        }
+
+        .hero-card {
+            background: var(--ink);
+            color: var(--white);
+            padding: clamp(2rem, 4vw, 3rem);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card h2 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-card p {
+            color: #dce2eb;
+            font-size: 0.98rem;
+            margin: 0;
+        }
+
+        /* =========================================================
+           FRAMEWORK (INPUT - DEVELOPMENT - FINALIZATION)
+        ========================================================= */
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .framework-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+        }
+
+        .stage-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.65rem;
+            border-radius: 999px;
             margin-bottom: 1rem;
         }
 
-        /* Lists */
-        ul, ol {
-            margin-left: 1.5rem;
+        .stage-input { background: #ede9fe; color: #5b21b6; }
+        .stage-process { background: #fff2cd; color: #8a5a00; }
+        .stage-output { background: #dcfce7; color: #166534; }
+
+        .framework-card ul {
+            padding-left: 1.2rem;
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .framework-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* =========================================================
+           RESEARCH QUESTIONS (3-COLUMN GRID)
+        ========================================================= */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .rq-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
             margin-bottom: 1.25rem;
+            border-radius: 50%;
+            background: #fff2cd;
+            color: var(--accent-dark);
+            font-weight: 850;
         }
 
-        li {
-            margin-bottom: 0.4rem;
+        .rq-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1rem;
         }
 
-        /* Card Callouts for Key Sections */
-        .callout {
-            background-color: var(--accent);
-            border-left: 4px solid var(--primary);
-            padding: 1.25rem 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin: 1.5rem 0;
+        /* =========================================================
+           KEY FINDINGS & LIKERT METRICS
+        ========================================================= */
+        .findings {
+            background: var(--surface);
         }
 
-        .findings-grid {
-            background-color: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.25rem;
+        .data-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            box-shadow: 0 4px 15px rgba(23, 32, 51, 0.03);
+        }
+
+        .data-card h3 {
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 1rem;
+        }
+
+        .metric-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.65rem 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.95rem;
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .score-badge {
+            background: #fff2cd;
+            color: var(--accent-dark);
+            font-weight: 800;
+            padding: 0.2rem 0.65rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+        }
+
+        .finding-subgroup {
             margin-top: 1rem;
+        }
+
+        .finding-subgroup h4 {
+            font-size: 0.95rem;
+            color: var(--accent-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .finding-subgroup p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 0.85rem;
+        }
+
+        /* =========================================================
+           QUALITATIVE THEMES (FLEX PILLS & CALLOUTS)
+        ========================================================= */
+        .pill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin: 1.5rem 0 2.5rem 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .pill-list li {
+            padding: 0.65rem 1.15rem;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--ink);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        /* =========================================================
+           SPLIT GRID: LIMITATIONS & RECOMMENDATIONS
+        ========================================================= */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .editorial-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2.25rem;
+        }
+
+        .editorial-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .editorial-card ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            color: var(--muted);
+        }
+
+        .editorial-card li {
+            margin-bottom: 0.6rem;
+        }
+
+        /* =========================================================
+           CTA SECTION
+        ========================================================= */
+        .cta-section {
+            padding: clamp(3rem, 6vw, 5rem) 0;
+            background: var(--surface);
+        }
+
+        .cta-box {
+            background: var(--ink);
+            color: var(--white);
+            border-radius: 24px;
+            padding: clamp(2.5rem, 5vw, 4.5rem);
+            text-align: center;
+        }
+
+        .cta-box h2 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            max-width: 680px;
+            margin: 0 auto 2rem;
+            color: #dce2eb;
+            font-size: 1.05rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 750;
+            background: var(--accent);
+            color: #241b08;
+            transition: transform 160ms ease, background 160ms ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            background: #ffd16c;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+        footer {
+            padding: 2.25rem 0;
+            background: #0e1522;
+            color: #aeb7c4;
+            border-top: 1px solid #1a2538;
+        }
+
+        .footer-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================================
+           RESPONSIVE BREAKPOINTS
+        ========================================================= */
+        @media (max-width: 950px) {
+            .hero-grid,
+            .split-grid,
+            .framework-grid,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav {
+                min-height: auto;
+                padding: 1rem 0;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .nav-list {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 0.35rem;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .footer-grid {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
 
-    <main class="container">
-        <header>
-            <h1>Human vs. AI: A Comparative Study of Writing Effectiveness among Mapúa University Students</h1>
-            <p class="author-meta"><strong>Author:</strong> <em>Iñaki Carmelo Sanderz E. Castasus</em></p>
-        </header>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
-        <section class="callout">
-            <h2>Summary</h2>
-            <p>
-                This study examines why Mapúa University students use Generative Artificial Intelligence (AI)
-                in essay writing and how this affects their independent writing abilities. The research argues
-                that although AI provides valuable academic support and helps students cope with heavy workloads,
-                long-term dependence may weaken writing proficiency through a process called cognitive offloading,
-                where students allow AI to perform tasks that would normally develop their critical thinking and
-                writing skills.
-            </p>
-        </section>
-
-        <section>
-            <h2>Background</h2>
-            <p>
-                Academic writing is a key requirement at Mapúa University. The rise of AI tools such as ChatGPT
-                has transformed how students approach writing tasks by assisting with brainstorming, grammar
-                correction, summarization, outlining, and even full essay generation.
-            </p>
-        </section>
-
-        <section>
-            <h2>Research Questions</h2>
-            <ol>
-                <li>Why do students feel more or less confident in their writing when using AI?</li>
-                <li>How does AI-assisted brainstorming compare with manual brainstorming?</li>
-                <li>What are the long-term effects of AI use on independent writing ability?</li>
-            </ol>
-        </section>
-
-        <section>
-            <h2>Methodology</h2>
-            <p>
-                The study used a qualitative case study with a mixed-method approach. Fifteen Mapúa University
-                students participated in surveys containing rating-scale questions and open-ended responses.
-            </p>
-        </section>
-
-        <section>
-            <h2>Key Findings</h2>
-
-            <div class="findings-grid">
-                <h3>1. AI as a Writing Safety Net</h3>
-                <ul>
-                    <li>Grammar correction: Often used (3.47)</li>
-                    <li>Outline generation: Sometimes used (3.07)</li>
-                    <li>Deadline-driven brainstorming: Sometimes used (3.13)</li>
-                    <li>Mostly AI-generated essays: Rarely submitted (2.20)</li>
-                    <li>Fact-checking AI outputs: Always performed (4.67)</li>
+    <!-- Navigation Landmark -->
+    <header class="site-header">
+        <div class="container nav">
+            <a class="brand" href="#">
+                Visual <span>Learning</span>
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="#abstract">Abstract</a></li>
+                    <li><a href="#framework">Framework</a></li>
+                    <li><a href="#questions">Questions</a></li>
+                    <li><a href="#findings">Findings</a></li>
+                    <li><a href="#themes">Qualitative Themes</a></li>
+                    <li><a href="#implications">Implications</a></li>
                 </ul>
+            </nav>
+        </div>
+    </header>
 
-                <h3>2. AI vs. Manual Brainstorming</h3>
-                <ul>
-                    <li>AI idea quality rated positively (3.67)</li>
-                    <li>Reduces stress moderately (3.08)</li>
-                    <li>Research accuracy rated neutral (3.00)</li>
-                    <li>Students still believe they can write independently (4.02)</li>
-                    <li>AI highly valued as a tutor (4.67)</li>
-                </ul>
+    <main id="main-content">
 
-                <h3>3. Long-Term Effects</h3>
-                <h4>Safety Net and Dependency</h4>
-                <p>Students increasingly rely on AI to begin assignments, creating dependency and reducing confidence when writing without assistance.</p>
+        <!-- Hero / Header Landmark -->
+        <section class="hero" id="abstract">
+            <div class="container hero-grid">
+                <div>
+                    <p class="eyebrow">Academic Analytical Essay • ENG120-0 A70</p>
+                    <h1>Human vs. AI: A Comparative Study of Writing Effectiveness</h1>
+                    <p class="hero-copy">
+                        An extended causal analysis examining how generative AI functions as an academic survival strategy among Mapúa University students, its role in cognitive offloading, and the emergence of the performance confidence gap.
+                    </p>
+                    <div class="hero-meta">
+                        <span>Author: <strong>Iñaki Carmelo Sanderz E. Castasus</strong></span>
+                        <span>Faculty: <strong>Asst. Prof. Jane C. Mangalus, M.A.</strong></span>
+                        <span>Affiliation: <strong>Mapúa University Department of Liberal Arts</strong></span>
+                    </div>
+                </div>
 
-                <h4>Confidence Gap</h4>
-                <p>Students feel confident in AI-assisted outputs but less confident about their own writing skills.</p>
-
-                <h4>Survival Strategy</h4>
-                <p>AI is primarily used to cope with heavy workloads, deadlines, and academic stress rather than to avoid work.</p>
+                <div class="hero-card">
+                    <p class="eyebrow" style="color: var(--accent);">Thesis Statement</p>
+                    <h2>Cognitive Offloading</h2>
+                    <p>
+                        While Generative AI provides Mapúa University students with an essential 'safety net' for managing heavy academic workloads, its long-term use leads to a form of cognitive offloading that creates a performance gap between AI-assisted output and independent writing proficiency.
+                    </p>
+                </div>
             </div>
         </section>
 
-        <section>
-            <h2>Student Perspectives</h2>
-            <ul>
-                <li>Brainstorming and outlining</li>
-                <li>Drafting content</li>
-                <li>Grammar checking</li>
-                <li>Research assistance</li>
-                <li>Explaining difficult concepts</li>
-            </ul>
+        <!-- Section: Conceptual Framework -->
+        <section class="section" id="framework">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Causal Analysis</p>
+                    <h2>Conceptual Research Framework</h2>
+                    <p>Mapping the cause-and-effect chain from environmental pressure to writing proficiency impact.</p>
+                </div>
+
+                <div class="framework-grid">
+                    <article class="framework-card">
+                        <span class="stage-pill stage-input">Input: Academic Environment</span>
+                        <h3>Triggers & Demands</h3>
+                        <ul>
+                            <li>Fast-paced Mapúa quarterly curriculum</li>
+                            <li>Heavy technical academic workload</li>
+                            <li>Writing anxiety and impending deadlines</li>
+                        </ul>
+                    </article>
+
+                    <article class="framework-card">
+                        <span class="stage-pill stage-process">Development: Process</span>
+                        <h3>Cognitive Offloading</h3>
+                        <ul>
+                            <li>AI-assisted brainstorming and ideation</li>
+                            <li>Automating initial essay outlines and drafts</li>
+                            <li>Polishing and refining syntax via LLMs</li>
+                        </ul>
+                    </article>
+
+                    <article class="framework-card">
+                        <span class="stage-pill stage-output">Finalization: Output</span>
+                        <h3>Writing Proficiency Impact</h3>
+                        <ul>
+                            <li>High-quality final essay output</li>
+                            <li>Improved technical grammar and coherence</li>
+                            <li>Psychological dependency on AI "safety net"</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <h2>Conclusion</h2>
-            <p>
-                Generative AI improves the technical quality of student writing and provides valuable academic
-                support. However, excessive reliance may reduce independent writing confidence, critical
-                thinking, and authentic voice. The study recommends balancing AI assistance with independent
-                practice to maintain writing proficiency.
-            </p>
+        <!-- Section: Research Questions -->
+        <section class="section" id="questions" style="border-top: 1px solid var(--line);">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Investigation</p>
+                    <h2>Research Objectives</h2>
+                    <p>Three central questions exploring confidence, ideation, and skill atrophy.</p>
+                </div>
+
+                <div class="grid-3">
+                    <article class="rq-card">
+                        <span class="card-number">01</span>
+                        <h3>Confidence Shift</h3>
+                        <p>Why do students feel more (or less) confident in their writing skills while using AI?</p>
+                    </article>
+
+                    <article class="rq-card">
+                        <span class="card-number">02</span>
+                        <h3>Ideation Quality</h3>
+                        <p>How does AI affect brainstorm ideas compared to traditional manual brainstorming?</p>
+                    </article>
+
+                    <article class="rq-card">
+                        <span class="card-number">03</span>
+                        <h3>Long-Term Autonomy</h3>
+                        <p>What is the effect of long-term AI use on a student's independent writing ability?</p>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <h2>Limitations</h2>
-            <ul>
-                <li>Small sample size (15 students)</li>
-                <li>Self-reported responses</li>
-                <li>Short study duration</li>
-                <li>Single-university focus</li>
-            </ul>
+        <!-- Section: Key Findings -->
+        <section class="section findings" id="findings">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Descriptive Statistics</p>
+                    <h2>Key Findings & Survey Results</h2>
+                    <p>Quantitative survey data collected from 15 undergraduate students across engineering, computing, and foundational disciplines.</p>
+                </div>
+
+                <div class="grid-3">
+                    <!-- Column 1 -->
+                    <article class="data-card">
+                        <h3>Table 1: Frequency of Use</h3>
+                        <ul class="metric-list">
+                            <li class="metric-item">
+                                <span>Fact-checking citations</span>
+                                <span class="score-badge">4.67 (Always)</span>
+                            </li>
+                            <li class="metric-item">
+                                <span>Grammar correction</span>
+                                <span class="score-badge">3.47 (Often)</span>
+                            </li>
+                            <li class="metric-item">
+                                <span>Deadline brainstorming</span>
+                                <span class="score-badge">3.13 (Neutral)</span>
+                            </li>
+                            <li class="metric-item">
+                                <span>Initial outline generation</span>
+                                <span class="score-badge">3.07 (Neutral)</span>
+                            </li>
+                            <li class="metric-item">
+                                <span>Submitting &gt;50% AI text</span>
+                                <span class="score-badge">2.20 (Rarely)</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!-- Column 2 -->
+                    <article class="data-card">
+                        <h3>Table 2: Perceived Proficiency</h3>
+                        <ul class="metric-list">
+                            <li class="metric-item">
+                                <span>Helpful as concept tutor</span>
+                                <span class="score-badge">4.67 (Always)</span>
+                            </li>
+                            <li class="metric-item">
+                                <span>Independent essay ability</span>
+                                <span class="score-badge">4.02 (Agree)</span>
+                            </li>
+                            <li class="metric-item">
+                                <span>AI idea quality vs. manual</span>
+                                <span class="score-badge">3.67 (Agree)</span>
+                            </li>
+                            <li class="metric-item">
+                                <span>Academic stress reduction</span>
+                                <span class="score-badge">3.08 (Neutral)</span>
+                            </li>
+                            <li class="metric-item">
+                                <span>Research info accuracy</span>
+                                <span class="score-badge">3.00 (Neutral)</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!-- Column 3 -->
+                    <article class="data-card">
+                        <h3>Core Behavioral Findings</h3>
+                        <div class="finding-subgroup">
+                            <h4>The Safety Net</h4>
+                            <p>Students use AI as a technical buffer against strict rubrics, causing initial writer's block when attempting to compose unassisted.</p>
+                        </div>
+                        <div class="finding-subgroup">
+                            <h4>The Confidence Gap</h4>
+                            <p>While submitted papers receive high marks, respondents report doubt in their personal ability to replicate that standard independently.</p>
+                        </div>
+                        <div class="finding-subgroup">
+                            <h4>Academic Endurance</h4>
+                            <p>Adoption is driven by survival in GED, CWTS, and technical courses rather than academic dishonesty.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <h2>Recommendations</h2>
-            <ul>
-                <li>Use larger sample sizes</li>
-                <li>Conduct longitudinal studies</li>
-                <li>Include professor perspectives</li>
-                <li>Compare different AI functions and platforms</li>
-                <li>Study AI use in thesis and high-stakes writing</li>
-            </ul>
+        <!-- Section: Qualitative Themes -->
+        <section class="section" id="themes">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Thematic Analysis</p>
+                    <h2>Student Voices & Lived Experience</h2>
+                    <p>Qualitative responses highlighting how students navigate ethics, workload, and authentic voice.</p>
+                </div>
+
+                <div class="grid-3">
+                    <article class="data-card">
+                        <h3>Academic Survival</h3>
+                        <p style="color: var(--muted); font-size: 0.95rem;">
+                            "Students utilized AI as a survival necessity when faced with numerous, simultaneous deadlines, heavy workloads, or weekly long essays under intense mental exhaustion."
+                        </p>
+                    </article>
+
+                    <article class="data-card">
+                        <h3>Authentic Voice & Ownership</h3>
+                        <p style="color: var(--muted); font-size: 0.95rem;">
+                            "Students feel ownership only when the core ideas originate from them. Heavy AI revision is avoided because it removes the 'human essence of struggle, imperfection, and nuance.'"
+                        </p>
+                    </article>
+
+                    <article class="data-card">
+                        <h3>Where the Line is Drawn</h3>
+                        <p style="color: var(--muted); font-size: 0.95rem;">
+                            "Students consciously reject AI when it replaces independent thinking or understanding. Work is acceptable for outlining and syntax, but unacceptable for bypassing comprehension."
+                        </p>
+                    </article>
+                </div>
+
+                <ul class="pill-list" style="margin-top: 2rem;">
+                    <li>Brainstorming & Ideation</li>
+                    <li>Overcoming Writer's Block</li>
+                    <li>Fixing Sentence Structure</li>
+                    <li>Concept Clarification</li>
+                    <li>Citation Formatting</li>
+                </ul>
+            </div>
         </section>
+
+        <!-- Section: Scope (Limitations & Recommendations) -->
+        <section class="section" id="implications" style="border-top: 1px solid var(--line);">
+            <div class="container">
+                <div class="split-grid">
+                    <article class="editorial-card">
+                        <p class="eyebrow">Scope & Constraints</p>
+                        <h3>Study Limitations</h3>
+                        <ul>
+                            <li>Sample size limited to 15 undergraduate Mapúa students</li>
+                            <li>Reliance on self-reported survey responses and respondent bias</li>
+                            <li>Conducted within a single academic quarter (cross-sectional)</li>
+                            <li>Did not isolate differences between individual LLM models (e.g., ChatGPT-4 vs. Grammarly)</li>
+                        </ul>
+                    </article>
+
+                    <article class="editorial-card">
+                        <p class="eyebrow">Future Directions</p>
+                        <h3>Recommendations</h3>
+                        <ul>
+                            <li>Expand sample size across multiple universities and faculties</li>
+                            <li>Conduct multi-year longitudinal studies evaluating unassisted writing retention</li>
+                            <li>Incorporate faculty assessment data to evaluate grading disparities</li>
+                            <li>Analyze the psychological impact of AI in high-stakes thesis and capstone projects</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Conclusion & CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-box">
+                    <p class="eyebrow" style="color: var(--accent);">Final Implication</p>
+                    <h2>Preserve the Human Element in Composition</h2>
+                    <p>
+                        Generative AI is an indispensable survival tool for modern academic rigor. However, preserving critical thinking requires treating AI as an interactive tutor rather than an intellectual proxy.
+                    </p>
+                    <a class="button" href="#abstract">Back to Top</a>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <!-- Footer Landmark -->
+    <footer>
+        <div class="container footer-grid">
+            <p><strong>Visual Learning</strong> • Academic Research Series</p>
+            <p>Mapúa University Department of Liberal Arts • ENG120-0</p>
+            <p>Author: Iñaki Carmelo Sanderz E. Castasus (2025104737)</p>
+        </div>
+    </footer>
 
 </body>
 </html>
