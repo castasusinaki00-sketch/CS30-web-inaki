@@ -571,7 +571,7 @@
                     <li><a href="#framework">Framework</a></li>
                     <li><a href="#questions">Questions</a></li>
                     <li><a href="#findings">Findings</a></li>
-                    <li><a href="#themes">Qualitative Themes</a></li>
+                    <li><a href="#themes">Themes</a></li>
                     <li><a href="#implications">Implications</a></li>
                 </ul>
             </nav>
@@ -580,19 +580,19 @@
 
     <main id="main-content">
 
-        <!-- Hero / Header Landmark -->
+        <!-- Hero Landmark -->
         <section class="hero" id="overview">
             <div class="container hero-grid">
                 <div>
-                    <p class="eyebrow">Analytical Perspective • Writing Insights</p>
+                    <p class="eyebrow">Writing & Technology • Analytical Insights</p>
                     <h1>Human vs. AI: A Comparative Study of Writing Effectiveness</h1>
                     <p class="hero-copy">
-                        An extended causal analysis examining how generative AI functions as a modern efficiency tool, its role in cognitive offloading, and the emergence of the performance confidence gap.
+                        An analysis examining how generative AI functions as a modern efficiency tool, its role in cognitive offloading, and the emergence of the performance confidence gap in independent writing.
                     </p>
                     <div class="hero-meta">
-                        <span>Series: <strong>Visual Learning Insights</strong></span>
-                        <span>Topic: <strong>AI & Composition</strong></span>
-                        <span>Focus: <strong>Cognitive Offloading & Writing</strong></span>
+                        <span>Format: <strong>Analytical Overview</strong></span>
+                        <span>Theme: <strong>Cognitive Offloading & Writing Autonomy</strong></span>
+                        <span>Audience: <strong>Writers, Educators & Creators</strong></span>
                     </div>
                 </div>
 
@@ -600,7 +600,7 @@
                     <p class="eyebrow" style="color: var(--accent);">Core Premise</p>
                     <h2>Cognitive Offloading</h2>
                     <p>
-                        While Generative AI provides writers and students with an essential 'safety net' for managing heavy workloads, its long-term use leads to a form of cognitive offloading that creates a performance gap between AI-assisted output and independent writing proficiency.
+                        While Generative AI provides an essential safety net for managing intensive writing workloads, extended reliance leads to cognitive offloading, creating an observable performance gap between assisted output and independent ability.
                     </p>
                 </div>
             </div>
@@ -610,71 +610,71 @@
         <section class="section" id="framework">
             <div class="container">
                 <div class="section-heading">
-                    <p class="eyebrow">Causal Analysis</p>
-                    <h2>Conceptual Research Framework</h2>
-                    <p>Mapping the cause-and-effect chain from environmental pressure to writing proficiency impact.</p>
+                    <p class="eyebrow">Process Model</p>
+                    <h2>Conceptual Framework</h2>
+                    <p>Mapping the cause-and-effect chain from environmental pressure to writing proficiency.</p>
                 </div>
 
                 <div class="framework-grid">
                     <article class="framework-card">
-                        <span class="stage-pill stage-input">Input: Modern Environment</span>
-                        <h3>Triggers & Demands</h3>
+                        <span class="stage-pill stage-input">Input: Demands</span>
+                        <h3>Triggers & Pressures</h3>
                         <ul>
-                            <li>Fast-paced project timelines</li>
-                            <li>Heavy workloads and dense information</li>
-                            <li>Writing anxiety and impending deadlines</li>
+                            <li>Accelerated project schedules</li>
+                            <li>High volume of complex technical documentation</li>
+                            <li>Writer's block and deadline constraints</li>
                         </ul>
                     </article>
 
                     <article class="framework-card">
-                        <span class="stage-pill stage-process">Development: Process</span>
+                        <span class="stage-pill stage-process">Process: Workflow</span>
                         <h3>Cognitive Offloading</h3>
                         <ul>
                             <li>AI-assisted brainstorming and ideation</li>
-                            <li>Automating initial outlines and drafts</li>
-                            <li>Polishing and refining syntax via LLMs</li>
+                            <li>Rapid outline and structural generation</li>
+                            <li>Syntax polishing and automated phrasing</li>
                         </ul>
                     </article>
 
                     <article class="framework-card">
-                        <span class="stage-pill stage-output">Finalization: Output</span>
-                        <h3>Writing Proficiency Impact</h3>
+                        <span class="stage-pill stage-output">Output: Impact</span>
+                        <h3>Skill & Independence</h3>
                         <ul>
-                            <li>High-quality final document output</li>
-                            <li>Improved technical grammar and coherence</li>
-                            <li>Psychological dependency on AI "safety net"</li>
+                            <li>Polished, high-speed final drafts</li>
+                            <li>Consistent grammar and clear organization</li>
+                            <li>Emergent hesitation during unassisted work</li>
                         </ul>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Section: Research Questions -->
+        <!-- Section: Key Questions -->
         <section class="section" id="questions" style="border-top: 1px solid var(--line);">
             <div class="container">
                 <div class="section-heading">
-                    <p class="eyebrow">Investigation</p>
-                    <h2>Core Objectives</h2>
-                    <p>Three central questions exploring confidence, ideation, and skill autonomy.</p>
+                    <p class="eyebrow">Key Questions</p>
+                    <h2>Core Inquiries</h2>
+                    <p>Three primary angles examining confidence, ideation, and long-term autonomy.</p>
                 </div>
 
                 <div class="grid-3">
                     <article class="rq-card">
                         <span class="card-number">01</span>
                         <h3>Confidence Shift</h3>
-                        <p>Why do individuals feel more (or less) confident in their writing skills while using AI?</p>
+                        <p>Why do writers experience shifts in personal confidence when drafting with AI versus writing independently?</p>
                     </article>
 
                     <article class="rq-card">
                         <span class="card-number">02</span>
                         <h3>Ideation Quality</h3>
-                        <p>How does AI affect brainstorm ideas compared to traditional manual brainstorming?</p>
+                        <p>How does AI-assisted ideation compare to organic, manual brainstorming in originality and nuance?</p>
                     </article>
 
                     <article class="rq-card">
                         <span class="card-number">03</span>
                         <h3>Long-Term Autonomy</h3>
-                        <p>What is the effect of long-term AI use on an individual's independent writing ability?</p>
+                        <p>What is the lasting effect of continuous AI usage on foundational writing and critical thinking skills?</p>
                     </article>
                 </div>
             </div>
@@ -684,114 +684,114 @@
         <section class="section findings" id="findings">
             <div class="container">
                 <div class="section-heading">
-                    <p class="eyebrow">Descriptive Statistics</p>
-                    <h2>Key Findings & Survey Results</h2>
-                    <p>Quantitative survey data collected from respondents across various technical and creative disciplines.</p>
+                    <p class="eyebrow">Metrics & Insights</p>
+                    <h2>Key Findings & Usage Data</h2>
+                    <p>Aggregated patterns observed across multidisciplinary writing groups and technical environments.</p>
                 </div>
 
                 <div class="grid-3">
                     <!-- Column 1 -->
                     <article class="data-card">
-                        <h3>Table 1: Frequency of Use</h3>
+                        <h3>Frequency of Use</h3>
                         <ul class="metric-list">
                             <li class="metric-item">
-                                <span>Fact-checking citations</span>
+                                <span>Fact-checking & references</span>
                                 <span class="score-badge">4.67 (Always)</span>
                             </li>
                             <li class="metric-item">
-                                <span>Grammar correction</span>
+                                <span>Grammar & syntax editing</span>
                                 <span class="score-badge">3.47 (Often)</span>
                             </li>
                             <li class="metric-item">
                                 <span>Deadline brainstorming</span>
-                                <span class="score-badge">3.13 (Neutral)</span>
+                                <span class="score-badge">3.13 (Moderate)</span>
                             </li>
                             <li class="metric-item">
-                                <span>Initial outline generation</span>
-                                <span class="score-badge">3.07 (Neutral)</span>
+                                <span>Initial outline drafting</span>
+                                <span class="score-badge">3.07 (Moderate)</span>
                             </li>
                             <li class="metric-item">
-                                <span>Submitting &gt;50% AI text</span>
-                                <span class="score-badge">2.20 (Rarely)</span>
+                                <span>Raw generated text usage</span>
+                                <span class="score-badge">2.20 (Rare)</span>
                             </li>
                         </ul>
                     </article>
 
                     <!-- Column 2 -->
                     <article class="data-card">
-                        <h3>Table 2: Perceived Proficiency</h3>
+                        <h3>Perceived Utility</h3>
                         <ul class="metric-list">
                             <li class="metric-item">
-                                <span>Helpful as concept tutor</span>
-                                <span class="score-badge">4.67 (Always)</span>
+                                <span>Concept clarification</span>
+                                <span class="score-badge">4.67 (High)</span>
                             </li>
                             <li class="metric-item">
-                                <span>Independent essay ability</span>
+                                <span>Independent composition</span>
                                 <span class="score-badge">4.02 (Agree)</span>
                             </li>
                             <li class="metric-item">
-                                <span>AI idea quality vs. manual</span>
-                                <span class="score-badge">3.67 (Agree)</span>
+                                <span>AI ideas vs. manual</span>
+                                <span class="score-badge">3.67 (Comparable)</span>
                             </li>
                             <li class="metric-item">
                                 <span>Workload stress reduction</span>
                                 <span class="score-badge">3.08 (Neutral)</span>
                             </li>
                             <li class="metric-item">
-                                <span>Research info accuracy</span>
-                                <span class="score-badge">3.00 (Neutral)</span>
+                                <span>Initial factual accuracy</span>
+                                <span class="score-badge">3.00 (Variable)</span>
                             </li>
                         </ul>
                     </article>
 
                     <!-- Column 3 -->
                     <article class="data-card">
-                        <h3>Core Behavioral Findings</h3>
+                        <h3>Behavioral Trends</h3>
                         <div class="finding-subgroup">
                             <h4>The Safety Net</h4>
-                            <p>Writers use AI as a technical buffer against strict constraints, causing initial hesitation when attempting to compose unassisted.</p>
+                            <p>Writers frequently employ tools as a buffer against strict requirements, creating hesitation when drafting without assistance.</p>
                         </div>
                         <div class="finding-subgroup">
                             <h4>The Confidence Gap</h4>
-                            <p>While submitted materials receive high marks, respondents report doubt in their personal ability to replicate that standard independently.</p>
+                            <p>Even when final deliverables succeed, writers often report lower self-assurance in replicating quality from scratch.</p>
                         </div>
                         <div class="finding-subgroup">
-                            <h4>Endurance & Utility</h4>
-                            <p>Adoption is driven by practical survival in high-pressure workloads rather than reliance on shortcuts.</p>
+                            <h4>Practical Utility</h4>
+                            <p>Adoption is primarily driven by managing high-volume output rather than avoiding effort.</p>
                         </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Section: Qualitative Themes -->
+        <!-- Section: Themes -->
         <section class="section" id="themes">
             <div class="container">
                 <div class="section-heading">
-                    <p class="eyebrow">Thematic Analysis</p>
-                    <h2>Voices & Lived Experience</h2>
-                    <p>Qualitative responses highlighting how individuals navigate efficiency, workload, and authentic voice.</p>
+                    <p class="eyebrow">Observations</p>
+                    <h2>Key Perspectives & Themes</h2>
+                    <p>Qualitative insights into how writers balance automated efficiency with authenticity.</p>
                 </div>
 
                 <div class="grid-3">
                     <article class="data-card">
-                        <h3>Workflow Survival</h3>
+                        <h3>Workflow Endurance</h3>
                         <p style="color: var(--muted); font-size: 0.95rem;">
-                            "Users utilized AI as a survival necessity when faced with numerous, simultaneous deadlines, heavy workloads, or weekly long-form tasks under intense mental exhaustion."
+                            Tools are most often turned to as a relief valve when managing demanding deadlines, multi-project workflows, and mental fatigue during long-form tasks.
                         </p>
                     </article>
 
                     <article class="data-card">
-                        <h3>Authentic Voice & Ownership</h3>
+                        <h3>Voice & Ownership</h3>
                         <p style="color: var(--muted); font-size: 0.95rem;">
-                            "Writers feel ownership only when the core ideas originate from them. Heavy AI revision is avoided because it removes the 'human essence of struggle, imperfection, and nuance.'"
+                            Writers maintain stronger ownership when initial thoughts and direction originate organically, avoiding over-editing that risks homogenizing tone.
                         </p>
                     </article>
 
                     <article class="data-card">
-                        <h3>Where the Line is Drawn</h3>
+                        <h3>Establishing Boundaries</h3>
                         <p style="color: var(--muted); font-size: 0.95rem;">
-                            "Individuals consciously reject AI when it replaces independent thinking or understanding. Work is acceptable for outlining and syntax, but unacceptable for bypassing comprehension."
+                            A clear distinction is drawn between utilizing AI for structural organization versus offloading critical analysis and core arguments.
                         </p>
                     </article>
                 </div>
@@ -799,50 +799,50 @@
                 <ul class="pill-list" style="margin-top: 2rem;">
                     <li>Brainstorming & Ideation</li>
                     <li>Overcoming Writer's Block</li>
-                    <li>Fixing Sentence Structure</li>
-                    <li>Concept Clarification</li>
-                    <li>Citation Formatting</li>
+                    <li>Structural Drafting</li>
+                    <li>Style & Syntax Refinement</li>
+                    <li>Concept Exploration</li>
                 </ul>
             </div>
         </section>
 
-        <!-- Section: Scope (Limitations & Recommendations) -->
+        <!-- Section: Scope & Future Focus -->
         <section class="section" id="implications" style="border-top: 1px solid var(--line);">
             <div class="container">
                 <div class="split-grid">
                     <article class="editorial-card">
-                        <p class="eyebrow">Scope & Constraints</p>
-                        <h3>Study Limitations</h3>
+                        <p class="eyebrow">Parameters</p>
+                        <h3>Considerations & Scope</h3>
                         <ul>
-                            <li>Sample size limited to undergraduate and professional participant groups</li>
-                            <li>Reliance on self-reported survey responses and respondent bias</li>
-                            <li>Conducted within a single timeframe (cross-sectional approach)</li>
-                            <li>Did not isolate differences between individual LLM models (e.g., GPT-4 vs. specialized tools)</li>
+                            <li>Data reflects self-reported usage trends and personal workflows</li>
+                            <li>Writing patterns differ significantly across technical and creative fields</li>
+                            <li>Differences between specific model capabilities and prompts remain fluid</li>
+                            <li>Cross-sectional snapshots capture initial adaptation rather than lifelong habit</li>
                         </ul>
                     </article>
 
                     <article class="editorial-card">
-                        <p class="eyebrow">Future Directions</p>
-                        <h3>Recommendations</h3>
+                        <p class="eyebrow">Looking Forward</p>
+                        <h3>Future Directions</h3>
                         <ul>
-                            <li>Expand sample size across multiple institutions and industries</li>
-                            <li>Conduct multi-year longitudinal studies evaluating unassisted writing retention</li>
-                            <li>Incorporate expert assessment data to evaluate quality disparities</li>
-                            <li>Analyze the psychological impact of AI in high-stakes professional and creative projects</li>
+                            <li>Longitudinal tracking of unassisted writing skill retention</li>
+                            <li>Comparative testing across varying levels of professional experience</li>
+                            <li>Evaluating rubric standards designed specifically for augmented workflows</li>
+                            <li>Investigating cognitive load differences across drafting phases</li>
                         </ul>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Section: Conclusion & CTA -->
+        <!-- Section: Callout / Close -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-box">
-                    <p class="eyebrow" style="color: var(--accent);">Final Implication</p>
-                    <h2>Preserve the Human Element in Composition</h2>
+                    <p class="eyebrow" style="color: var(--accent);">Summary</p>
+                    <h2>Preserving the Human Element</h2>
                     <p>
-                        Generative AI is an indispensable tool for modern writing rigor. However, preserving critical thinking requires treating AI as an interactive tutor rather than an intellectual proxy.
+                        Generative tools offer unprecedented productivity for modern writing demands. The long-term goal is keeping AI as a collaborative sounding board while retaining ownership of critical thought and original voice.
                     </p>
                     <a class="button" href="#overview">Back to Top</a>
                 </div>
@@ -854,9 +854,8 @@
     <!-- Footer Landmark -->
     <footer>
         <div class="container footer-grid">
-            <p><strong>Visual Learning</strong> • Insights Series</p>
-            <p>Department of Liberal Arts & Composition Studies</p>
-            <p>Author: Iñaki Carmelo Sanderz E. Castasus</p>
+            <p><strong>Visual Learning</strong> • Composition & Technology Insights</p>
+            <p>&copy; Visual Learning Project. All rights reserved.</p>
         </div>
     </footer>
 
