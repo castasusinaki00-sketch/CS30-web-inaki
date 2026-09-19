@@ -52,7 +52,14 @@
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: var(--bg);
+            background-color: var(--bg);
+            /* Subtle layered backdrop texture of a student writing on paper with a soft white overlay */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)),
+                url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
             color: var(--text-secondary);
             line-height: 1.6;
         }
@@ -90,7 +97,7 @@
         /* Navigation Header */
         header {
             border-bottom: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.94);
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
@@ -161,6 +168,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             padding: 12px 26px;
             border-radius: 999px;
             font-weight: 600;
@@ -261,6 +269,7 @@
             height: 400px;
             border: 1px solid var(--border);
             box-shadow: var(--shadow-lg);
+            background: #FFFFFF;
         }
 
         .hero-image-wrapper img {
@@ -303,12 +312,13 @@
         }
 
         .idea-box {
-            background: var(--surface-light);
+            background: rgba(234, 243, 238, 0.9);
             border: 1px solid var(--green-border);
             color: var(--text-primary);
             padding: 40px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(6px);
         }
 
         .idea-box h3 {
@@ -337,10 +347,11 @@
         }
 
         .step-card {
-            background: var(--surface);
+            background: rgba(248, 250, 249, 0.9);
             padding: 24px;
             border-radius: var(--radius-md);
             border: 1px solid var(--border);
+            backdrop-filter: blur(6px);
             transition: transform 0.2s, border-color 0.2s;
         }
 
@@ -398,10 +409,11 @@
         }
 
         .card {
-            background: var(--surface);
+            background: rgba(248, 250, 249, 0.9);
             border: 1px solid var(--border);
             padding: 32px;
             border-radius: var(--radius-md);
+            backdrop-filter: blur(6px);
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
@@ -424,12 +436,13 @@
            WRITECRAFT INTERACTIVE STUDIO WIDGET
         ====================================================== */
         .studio-widget {
-            background: var(--surface);
+            background: rgba(248, 250, 249, 0.95);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 28px;
             margin-top: 24px;
             box-shadow: var(--shadow-md);
+            backdrop-filter: blur(8px);
         }
 
         .studio-grid {
@@ -990,10 +1003,11 @@
         }
 
         .matter-card {
-            background: var(--surface);
+            background: rgba(248, 250, 249, 0.9);
             border: 1px solid var(--border);
             border-radius: 18px;
             padding: 32px;
+            backdrop-filter: blur(6px);
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
@@ -1021,13 +1035,14 @@
         }
 
         .research-banner {
-            background: var(--surface-light);
+            background: rgba(234, 243, 238, 0.9);
             border: 1px solid var(--green-border);
             border-radius: 16px;
             padding: 24px 30px;
             display: flex;
             align-items: center;
             gap: 20px;
+            backdrop-filter: blur(6px);
         }
 
         .banner-badge {
@@ -1047,13 +1062,69 @@
             margin: 0;
         }
 
+        /* Resources & External AI Assistants Shelf */
+        .resources-shelf {
+            margin-top: 50px;
+            padding-top: 36px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .resources-shelf h3 {
+            font-size: 1.15rem;
+            color: var(--green-dark);
+            margin-bottom: 8px;
+        }
+
+        .resources-shelf p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .ai-links-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .ai-link-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: #FFFFFF;
+            border: 1px solid var(--green-border);
+            border-radius: 999px;
+            color: var(--green-dark);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .ai-link-pill:hover {
+            background: var(--green-soft);
+            border-color: var(--green-primary);
+            color: var(--green-primary);
+            transform: translateY(-2px);
+        }
+
         /* Footer */
         footer {
             text-align: center;
             padding: 40px 20px;
             border-top: 1px solid var(--border);
             color: var(--text-muted);
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            color: var(--text-muted);
         }
 
         /* Responsive Breakpoints */
@@ -1294,7 +1365,9 @@
                         <textarea id="lessonText" class="studio-textarea" placeholder="Paste your draft, notes, or ideas here (50 - 3,000 characters)..."></textarea>
 
                         <div id="statusMessage" class="status-box" role="alert"></div>
-                        <button type="button" class="btn primary" id="generateBtn" onclick="handleGenerateAction()">Generate Visual Output</button>
+                        <button type="button" class="btn primary" id="generateBtn" onclick="handleGenerateAction()" title="Generate Visual Output">
+                            <span>✏️</span> Generate Visual Output
+                        </button>
                     </div>
 
                     <!-- Right Column: Results & Interactive Display -->
@@ -1436,6 +1509,27 @@
                     <strong>Keep the Author in Control:</strong> Leverage smart diagnostics to organize, challenge, and refine your arguments—while keeping your authentic judgment in the driver's seat.
                 </p>
             </div>
+
+            <!-- External AI Research & Writing Assistants Shelf -->
+            <div class="resources-shelf">
+                <h3>Explore AI Writing & Research Tools</h3>
+                <p>Learn how top frontier LLMs compare for ideation, outline expansion, and proofreading.</p>
+                <div class="ai-links-grid">
+                    <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="ai-link-pill" onclick="trackStudioEvent('external_ai_link', 'Resources Shelf', 'Google Gemini')">
+                        <span>✨</span> Google Gemini
+                    </a>
+                    <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="ai-link-pill" onclick="trackStudioEvent('external_ai_link', 'Resources Shelf', 'ChatGPT')">
+                        <span>🤖</span> OpenAI ChatGPT
+                    </a>
+                    <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="ai-link-pill" onclick="trackStudioEvent('external_ai_link', 'Resources Shelf', 'Claude')">
+                        <span>📜</span> Anthropic Claude
+                    </a>
+                    <a href="https://www.perplexity.ai" target="_blank" rel="noopener noreferrer" class="ai-link-pill" onclick="trackStudioEvent('external_ai_link', 'Resources Shelf', 'Perplexity')">
+                        <span>🔍</span> Perplexity AI
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1445,6 +1539,7 @@
 <footer>
     <div class="container">
         <p>WriteCraft • An Interactive Platform for Writers, Thinkers, and Researchers</p>
+        <p class="footer-note">Designed to cultivate independent thought alongside modern generative tools.</p>
     </div>
 </footer>
 
