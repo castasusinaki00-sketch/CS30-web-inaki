@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visual Learning: An interactive studio comparing human writing against artificial intelligence.">
+    <title>Visual Learning | Interactive Writing Studio</title>
+
+    <style>
+        /* =========================================================
+           DESIGN TOKENS & BASE
+        ========================================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #172033;
+            --muted: #5f6b7a;
+            --surface: #f5f7fa;
+            --surface-tint: #fff8e9;
+            --accent: #c8c221;
+            --accent-dark: #af8844;
+            --line: #dfe4ea;
+            --white: #ffffff;
+            --success: #15803d;
+            --warning: #b45309;
+            --danger: #b91c1c;
+            --max-width: 1180px;
+            --radius: 16px;
+            --shadow: 0 16px 40px rgba(23, 32, 51, 0.07);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: var(--white);
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        /* =========================================================
+           ACCESSIBILITY
+        ========================================================= */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            z-index: 999;
+            padding: 0.75rem 1rem;
+            background: var(--ink);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 0 0 8px 8px;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* =========================================================
+           LAYOUT & TYPOGRAPHY
+        ========================================================= */
+        .container {
+            width: min(var(--max-width), calc(100% - 2.5rem));
+            margin-inline: auto;
+        }
+
+        .section {
+            padding: clamp(3.5rem, 7vw, 6rem) 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 0 1rem;
+            color: var(--accent-dark);
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 24px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        h1, h2, h3, h4 {
+            margin-top: 0;
+            color: var(--ink);
+            line-height: 1.15;
+            letter-spacing: -0.035em;
+        }
+
+        h1 {
+            font-size: clamp(2.3rem, 5vw, 4rem);
+            margin-bottom: 1.25rem;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .section-heading {
+            max-width: 760px;
+            margin-bottom: 2.75rem;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.15rem;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .brand span {
+            color: var(--accent-dark);
+        }
+
+        .nav-list {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 650;
+            color: #465162;
+            transition: color 150ms ease;
+        }
+
+        .nav-list a:hover {
+            color: var(--ink);
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+        .hero {
+            background: linear-gradient(135deg, #f7f8fa 0%, #ffffff 55%, #fff8e9 100%);
+            padding: clamp(3.5rem, 8vw, 6.5rem) 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+            align-items: center;
+            gap: clamp(2rem, 5vw, 4.5rem);
+        }
+
+        .hero-copy {
+            font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+            color: var(--muted);
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 750;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            background: var(--accent);
+            color: #241b08;
+        }
+
+        .button-primary:hover {
+            background: #ffd16c;
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--ink);
+            border-color: #aeb7c4;
+        }
+
+        .button-secondary:hover {
+            background: var(--surface);
+        }
+
+        .hero-card {
+            background: var(--ink);
+            color: var(--white);
+            padding: clamp(2rem, 4vw, 3rem);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card h2 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-card p {
+            color: #dce2eb;
+            font-size: 0.98rem;
+            margin: 0;
+        }
+
+        /* =========================================================
+           INTERACTIVE LAB (CORE WIDGET)
+        ========================================================= */
+        .lab-section {
+            background: var(--surface);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .prompt-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .select-input {
+            padding: 0.65rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .lab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .editor-pane {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .editor-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .word-badge {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        textarea {
+            width: 100%;
+            height: 230px;
+            padding: 1rem;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--ink);
+            background: #fafbfc;
+            transition: border-color 0.15s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--ink);
+            background: var(--white);
+        }
+
+        .ai-tools-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.85rem;
+        }
+
+        .tool-btn {
+            background: var(--surface-tint);
+            color: var(--accent-dark);
+            border: 1px solid #e5d8b8;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 750;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .tool-btn:hover {
+            background: #fff2cd;
+            transform: translateY(-1px);
+        }
+
+        .lab-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Diagnostic Results Card */
+        .diagnostic-card {
+            display: none;
+            margin-top: 2.5rem;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 2.25rem;
+            box-shadow: var(--shadow);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .diag-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 1.5rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-green { background: #dcfce7; color: var(--success); }
+        .badge-yellow { background: #fef9c3; color: var(--warning); }
+        .badge-red { background: #fee2e2; color: var(--danger); }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .metric-cell {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: 1.15rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-cell span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 750;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-cell strong {
+            font-size: 1.5rem;
+            color: var(--ink);
+        }
+
+        .insights-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .insight-box {
+            background: var(--surface);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .insight-box h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .insight-box ul {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .insight-box li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* =========================================================
+           FEATURES & PILLARS (3 COLUMNS)
+        ========================================================= */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            margin-bottom: 1.25rem;
+            border-radius: 50%;
+            background: #fff2cd;
+            color: var(--accent-dark);
+            font-weight: 850;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        /* =========================================================
+           FLEX PILL LIST
+        ========================================================= */
+        .pill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin: 1.5rem 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .pill-list li {
+            padding: 0.65rem 1.15rem;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--ink);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        /* =========================================================
+           SPLIT EDITORIAL GRID
+        ========================================================= */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .editorial-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2.25rem;
+        }
+
+        .editorial-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .editorial-card ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            color: var(--muted);
+        }
+
+        .editorial-card li {
+            margin-bottom: 0.6rem;
+        }
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+        .cta-section {
+            padding: clamp(3rem, 6vw, 5rem) 0;
+            background: var(--surface);
+        }
+
+        .cta-box {
+            background: var(--ink);
+            color: var(--white);
+            border-radius: 24px;
+            padding: clamp(2.5rem, 5vw, 4.5rem);
+            text-align: center;
+        }
+
+        .cta-box h2 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            max-width: 680px;
+            margin: 0 auto 2rem;
+            color: #dce2eb;
+            font-size: 1.05rem;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+        footer {
+            padding: 2.25rem 0;
+            background: #0e1522;
+            color: #aeb7c4;
+            border-top: 1px solid #1a2538;
+        }
+
+        .footer-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================================
+           RESPONSIVE BREAKPOINTS
+        ========================================================= */
+        @media (max-width: 950px) {
+            .hero-grid,
+            .lab-grid,
+            .split-grid,
+            .grid-3,
+            .insights-row {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav {
+                min-height: auto;
+                padding: 1rem 0;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .nav-list {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 0.35rem;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .footer-grid {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Navigation Landmark -->
+    <header class="site-header">
+        <div class="container nav">
+            <a class="brand" href="#">
+                Visual <span>Learning</span>
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="#lab">Writing Studio</a></li>
+                    <li><a href="#principles">Core Pillars</a></li>
+                    <li><a href="#insights">Insights</a></li>
+                    <li><a href="#playbook">Strategies</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- Hero Landmark -->
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <p class="eyebrow">Interactive Studio • Dual Composition</p>
+                    <h1>Human Creativity Meets Artificial Intelligence</h1>
+                    <p class="hero-copy">
+                        Discover the boundary between authentic thought and automated polish. Compare your raw drafting against AI-assisted composition, track cognitive offloading, and refine your distinctive style.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#lab">Launch Writing Studio</a>
+                        <a class="button button-secondary" href="#principles">Explore Principles</a>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <p class="eyebrow" style="color: var(--accent);">Key Concept</p>
+                    <h2>Cognitive Offloading</h2>
+                    <p>
+                        Delegating ideation, structure, and argument flow to automated tools accelerates short-term velocity, but unassisted composition is where genuine voice and critical reasoning are forged.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Writing Studio Section -->
+        <section class="section lab-section" id="lab">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Hands-On Laboratory</p>
+                    <h2>Dual-Mode Writing Sandbox</h2>
+                    <p>Draft your initial response without digital tools in Draft A. Then explore automated outlines, tone adjustments, and vocabulary polish in Draft B.</p>
+                </div>
+
+                <div class="prompt-bar">
+                    <div>
+                        <label for="promptSelect" style="font-weight: 750; font-size: 0.95rem; margin-right: 0.5rem;">Select Topic:</label>
+                        <select id="promptSelect" class="select-input" onchange="loadPrompt()">
+                            <option value="tech">Technology: Does digital convenience reduce authentic problem-solving?</option>
+                            <option value="education">Learning: Can holistic projects replace standardized metrics?</option>
+                            <option value="voice">Authenticity: Does algorithmic writing carry genuine emotional weight?</option>
+                            <option value="custom">Custom topic: Write your own</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dual Sandbox Editors -->
+                <div class="lab-grid">
+                    <!-- Left: Draft A -->
+                    <article class="editor-pane">
+                        <div class="editor-header">
+                            <h3>Draft A: Unassisted Writing</h3>
+                            <span id="soloWords" class="word-badge">0 words</span>
+                        </div>
+                        <textarea id="draftSolo" placeholder="Write your ideas freely without assistance..." oninput="updateCounts()"></textarea>
+                    </article>
+
+                    <!-- Right: Draft B -->
+                    <article class="editor-pane">
+                        <div class="editor-header">
+                            <h3>Draft B: AI-Assisted Writing</h3>
+                            <span id="aiWords" class="word-badge">0 words</span>
+                        </div>
+                        <textarea id="draftAI" placeholder="Refine your thoughts or experiment with automated additions..." oninput="updateCounts()"></textarea>
+                        
+                        <div class="ai-tools-bar">
+                            <button type="button" class="tool-btn" onclick="applyOutline()">⚡ Auto-Outline</button>
+                            <button type="button" class="tool-btn" onclick="applyPolishing()">✨ Fix Syntax & Flow</button>
+                            <button type="button" class="tool-btn" onclick="applyVocabulary()">📚 Elevate Tone</button>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="lab-actions">
+                    <button type="button" class="button button-primary" onclick="evaluateDrafts()">Run Comparison & Diagnostic</button>
+                </div>
+
+                <!-- Dynamic Diagnostic Results -->
+                <div id="diagnosticResults" class="diagnostic-card">
+                    <div class="diag-head">
+                        <div>
+                            <h3 style="margin-bottom: 0.25rem;">Composition Diagnostic</h3>
+                            <p style="margin: 0; color: var(--muted); font-size: 0.95rem;">Real-time analysis of independent voice versus automated structuring.</p>
+                        </div>
+                        <span id="statusBadge" class="status-badge badge-green">Authentic Voice Preserved</span>
+                    </div>
+
+                    <div class="metrics-row">
+                        <div class="metric-cell">
+                            <span>Draft A Words</span>
+                            <strong id="metricSoloCount">0</strong>
+                        </div>
+                        <div class="metric-cell">
+                            <span>Draft B Words</span>
+                            <strong id="metricAiCount">0</strong>
+                        </div>
+                        <div class="metric-cell">
+                            <span>Lexical Variety</span>
+                            <strong id="metricDiversity">0%</strong>
+                        </div>
+                        <div class="metric-cell">
+                            <span>Offloading Index</span>
+                            <strong id="metricOffload">Minimal</strong>
+                        </div>
+                    </div>
+
+                    <div class="insights-row">
+                        <div class="insight-box">
+                            <h4>Observations on Voice</h4>
+                            <p id="voiceObservation" style="color: var(--muted); font-size: 0.95rem; margin: 0;"></p>
+                        </div>
+                        <div class="insight-box">
+                            <h4>Actionable Next Steps</h4>
+                            <ul id="improvementList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Pillars Section -->
+        <section class="section" id="principles">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Core Pillars</p>
+                    <h2>Balancing Speed & Authenticity</h2>
+                    <p>Three essential considerations for creators drafting in an era of automated assistants.</p>
+                </div>
+
+                <div class="grid-3">
+                    <article class="feature-card">
+                        <span class="card-number">01</span>
+                        <h3>Initiation & Discovery</h3>
+                        <p>Facing the empty page cultivates independent mental frameworks. Moving directly to automated generation bypasses the productive tension that creates original ideas.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="card-number">02</span>
+                        <h3>Voice & Idiosyncrasy</h3>
+                        <p>Human prose thrives on unexpected connections, lived vulnerability, and unique cadence. Automated polish often smooths raw emotion into predictable patterns.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="card-number">03</span>
+                        <h3>Strategic Polishing</h3>
+                        <p>Language models perform best as an interactive sounding board—ideal for grammar verification, concept deconstruction, and broad structural checks.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights Section -->
+        <section class="section" id="insights" style="background: var(--surface); border-top: 1px solid var(--line);">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Practical Insights</p>
+                    <h2>Navigating the Modern Workflow</h2>
+                    <p>Understanding how digital creators manage pressure, maintain high standards, and stay in control of their content.</p>
+                </div>
+
+                <div class="grid-3">
+                    <article class="feature-card">
+                        <h3>The Safety Net Effect</h3>
+                        <p>Relying on technology as an indispensable guarantee against tight timelines can create subtle friction when attempting to initiate unassisted drafts.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <h3>The Ownership Line</h3>
+                        <p>Writers retain authentic pride in their work when core arguments originate internally, using automated tools only to clarify and test assertions.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <h3>Critical Editing</h3>
+                        <p>Effective writers treat automated text with constructive skepticism, rewriting phrases into natural rhythms before finalizing any draft.</p>
+                    </article>
+                </div>
+
+                <ul class="pill-list" style="margin-top: 2rem;">
+                    <li>Cognitive Stamina</li>
+                    <li>Authentic Tone</li>
+                    <li>Socratic Ideation</li>
+                    <li>Critical Revision</li>
+                    <li>Structure Testing</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Strategies Section -->
+        <section class="section" id="playbook" style="border-top: 1px solid var(--line);">
+            <div class="container">
+                <div class="split-grid">
+                    <article class="editorial-card">
+                        <p class="eyebrow">Pitfalls</p>
+                        <h3>Common Traps</h3>
+                        <ul>
+                            <li>Generating full outlines before forming a personal point of view</li>
+                            <li>Accepting uniform sentence structures that dull unique style</li>
+                            <li>Losing patience for deliberate, slow-form brainstorming</li>
+                            <li>Mistaking mechanical fluency for genuine critical depth</li>
+                        </ul>
+                    </article>
+
+                    <article class="editorial-card">
+                        <p class="eyebrow">Playbook</p>
+                        <h3>Best Practices</h3>
+                        <ul>
+                            <li>Draft the opening thesis statement completely unassisted</li>
+                            <li>Use AI as a debating partner to challenge your logic</li>
+                            <li>Practice 10-minute uninterrupted freewriting exercises</li>
+                            <li>Actively revise AI suggestions into your natural speaking voice</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-box">
+                    <p class="eyebrow" style="color: var(--accent);">Take Action</p>
+                    <h2>Empower Your Mind, Don't Replace It</h2>
+                    <p>
+                        Use artificial intelligence to spark curiosity and challenge assumptions—while keeping your creative judgment, authenticity, and human voice in the driver's seat.
+                    </p>
+                    <a class="button button-primary" href="#lab">Start a New Draft</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Landmark -->
+    <footer>
+        <div class="container footer-grid">
+            <p><strong>Visual Learning</strong> • Human & AI Writing Studio</p>
+            <p>Designed for writers, creators, and modern thinkers.</p>
+            <p><a href="#main-content">Back to Top ↑</a></p>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+         INTERACTIVE SCRIPT LOGIC
+    ========================================================= */
+    -->
+    <script>
+        const promptData = {
+            tech: "Technological convenience enhances efficiency, but over-reliance on automated tools risks eroding fundamental critical thinking.",
+            education: "Examinations reward rote memorization over applied problem-solving; self-directed portfolios are a superior indicator of intelligence.",
+            voice: "While digital models can simulate structure and style, true literature requires lived emotion, struggle, and human perspective.",
+            custom: ""
+        };
+
+        function loadPrompt() {
+            const select = document.getElementById('promptSelect');
+            const chosen = promptData[select.value];
+            if (chosen && document.getElementById('draftSolo').value === "") {
+                document.getElementById('draftSolo').value = chosen;
+                updateCounts();
+            }
+        }
+
+        function updateCounts() {
+            const solo = document.getElementById('draftSolo').value.trim();
+            const ai = document.getElementById('draftAI').value.trim();
+
+            const soloCount = solo ? solo.split(/\s+/).length : 0;
+            const aiCount = ai ? ai.split(/\s+/).length : 0;
+
+            document.getElementById('soloWords').innerText = `${soloCount} words`;
+            document.getElementById('aiWords').innerText = `${aiCount} words`;
+        }
+
+        function applyOutline() {
+            const solo = document.getElementById('draftSolo').value.trim();
+            const base = solo || "Core Subject Matter";
+            const generated = `1. Central Thesis: Exploring ${base.slice(0, 30)}...\n2. Key Arguments & Lived Observations\n3. Counterpoints and Alternative Perspectives\n4. Synthesis & Concluding Thought`;
+            document.getElementById('draftAI').value = generated;
+            updateCounts();
+        }
+
+        function applyPolishing() {
+            const solo = document.getElementById('draftSolo').value.trim();
+            if (!solo) {
+                alert("Write some thoughts in Draft A first to polish!");
+                return;
+            }
+            const polished = solo
+                .replace(/\b(good|fine)\b/gi, "exemplary")
+                .replace(/\b(bad)\b/gi, "counterproductive")
+                .replace(/\b(think|feel)\b/gi, "contend")
+                .replace(/\b(big)\b/gi, "substantial")
+                + " Furthermore, this underlines the critical balance between speed and creative depth.";
+            document.getElementById('draftAI').value = polished;
+            updateCounts();
+        }
+
+        function applyVocabulary() {
+            const solo = document.getElementById('draftSolo').value.trim();
+            if (!solo) {
+                alert("Please add content to Draft A first!");
+                return;
+            }
+            const enhanced = "Evidently, " + solo.charAt(0).toLowerCase() + solo.slice(1) + 
+                " Such observations illustrate an intricate cognitive pattern that warrants careful evaluation.";
+            document.getElementById('draftAI').value = enhanced;
+            updateCounts();
+        }
+
+        function evaluateDrafts() {
+            const solo = document.getElementById('draftSolo').value.trim();
+            const ai = document.getElementById('draftAI').value.trim();
+
+            if (!solo && !ai) {
+                alert("Please write in Draft A or Draft B before running the diagnostic.");
+                return;
+            }
+
+            const soloWords = solo ? solo.split(/\s+/) : [];
+            const aiWords = ai ? ai.split(/\s+/) : [];
+
+            const soloCount = soloWords.length;
+            const aiCount = aiWords.length;
+
+            const allWords = [...soloWords, ...aiWords].map(w => w.toLowerCase());
+            const uniqueWords = new Set(allWords);
+            const diversityRatio = allWords.length > 0 ? Math.round((uniqueWords.size / allWords.length) * 100) : 0;
+
+            document.getElementById('diagnosticResults').style.display = 'block';
+            document.getElementById('metricSoloCount').innerText = soloCount;
+            document.getElementById('metricAiCount').innerText = aiCount;
+            document.getElementById('metricDiversity').innerText = `${diversityRatio}%`;
+
+            const badge = document.getElementById('statusBadge');
+            const offloadDisplay = document.getElementById('metricOffload');
+            const voiceObs = document.getElementById('voiceObservation');
+            const improvementList = document.getElementById('improvementList');
+
+            improvementList.innerHTML = "";
+
+            if (aiCount > soloCount * 1.5 && aiCount > 25) {
+                badge.className = "status-badge badge-red";
+                badge.innerText = "High Cognitive Offloading";
+                offloadDisplay.innerText = "Heavy";
+                voiceObs.innerText = "Your assisted draft heavily outpaces your manual baseline. While the resulting text appears complex, you are delegating early structural and ideational tasks to the tool.";
+
+                improvementList.innerHTML += "<li>Practice 5-minute timed unassisted freewriting to build starting momentum.</li>";
+                improvementList.innerHTML += "<li>Draft topic sentences manually before consulting automated outlines.</li>";
+                improvementList.innerHTML += "<li>Review automated text and substitute unfamiliar terms with your everyday vocabulary.</li>";
+            } else if (aiCount > 0 && soloCount > 0) {
+                badge.className = "status-badge badge-yellow";
+                badge.innerText = "Balanced Collaboration";
+                offloadDisplay.innerText = "Moderate";
+                voiceObs.innerText = "You maintain authentic ownership of your core thoughts while utilizing digital tools primarily for syntax polish and structural support.";
+
+                improvementList.innerHTML += "<li>Experiment with building transitions without tool suggestions.</li>";
+                improvementList.innerHTML += "<li>Challenge the automated suggestions with your own counterarguments.</li>";
+            } else {
+                badge.className = "status-badge badge-green";
+                badge.innerText = "Authentic Voice Preserved";
+                offloadDisplay.innerText = "Minimal";
+                voiceObs.innerText = "You are drafting independently. Your arguments reflect raw, personal critical thinking and unmediated style.";
+
+                improvementList.innerHTML += "<li>Continue regular unassisted drafting to preserve mental agility.</li>";
+                improvementList.innerHTML += "<li>Consult tools only at the final proofreading stage to preserve your voice.</li>";
+            }
+
+            document.getElementById('diagnosticResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
