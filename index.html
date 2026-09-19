@@ -3,37 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    <title>WriteCraft | Master Your Writing with AI Diagnostic Feedback</title>
 
     <style>
         :root {
-            /* Deep wine red, warm gold, and crisp readable typography palette */
-            --bg: #d1dbd0;
-            --surface: #f0e8ea;
-            --surface-elevated: #3D1821;
-            --surface-light: #d3bdc2;
+            /* Crisp White Canvas with Rich Emerald and Forest Green Accents */
+            --bg: #FFFFFF;
+            --surface: #F8FAF9;
+            --surface-elevated: #FFFFFF;
+            --surface-light: #EAF3EE;
 
-            --gold: #E5C158;
-            --gold-muted: #B89738;
-            --gold-light: #F5E6B8;
+            --green-primary: #15803D;      /* Vibrant Emerald */
+            --green-dark: #0F5132;         /* Deep Forest */
+            --green-soft: #D1FAE5;         /* Mint Accent Soft */
+            --green-border: #BBF7D0;
 
-            --text-primary: #FFFFFF;
-            --text-secondary: #E8D6D9;
-            --text-muted: #BFA5AA;
+            --text-primary: #0F172A;       /* High-contrast Slate */
+            --text-secondary: #334155;     /* Readable Body Charcoal */
+            --text-muted: #64748B;         /* Secondary Labels */
 
-            --border: #4A222B;
-            --border-highlight: #703340;
-            --focus-ring: #F59E0B;
+            --border: #E2E8F0;
+            --border-highlight: #CBD5E1;
+            --focus-ring: #10B981;
 
-            --error: #FCA5A5;
-            --error-bg: #491319;
-            --success: #86EFAC;
-            --warning: #FDE047;
+            --error: #DC2626;
+            --error-bg: #FEF2F2;
+            --success: #16A34A;
+            --warning: #D97706;
 
             --radius-sm: 8px;
             --radius-md: 14px;
             --radius-lg: 20px;
-            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 81, 50, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 20px 30px -10px rgba(15, 81, 50, 0.12);
         }
 
         * {
@@ -54,13 +57,13 @@
             line-height: 1.6;
         }
 
-        /* Accessibility: Skip Link & Focus States */
+        /* Accessibility: Skip Link & Focus */
         .skip-link {
             position: absolute;
             top: -50px;
             left: 20px;
-            background: var(--gold);
-            color: #1A070B;
+            background: var(--green-primary);
+            color: #FFFFFF;
             padding: 10px 16px;
             z-index: 999;
             text-decoration: none;
@@ -87,8 +90,8 @@
         /* Navigation Header */
         header {
             border-bottom: 1px solid var(--border);
-            background: rgba(34, 11, 16, 0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -98,19 +101,35 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 18px 0;
         }
 
         .logo {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            letter-spacing: 0.5px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--green-dark);
+            letter-spacing: -0.5px;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--green-soft);
+            color: var(--green-primary);
+            border-radius: 8px;
+            font-size: 1.1rem;
         }
 
         .logo span {
-            color: var(--gold);
+            color: var(--green-primary);
+            font-weight: 600;
         }
 
         .nav-links {
@@ -128,7 +147,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--gold);
+            color: var(--green-primary);
         }
 
         /* Button System */
@@ -156,23 +175,24 @@
         }
 
         .primary {
-            background: var(--gold);
-            color: #1E080C;
-            box-shadow: 0 4px 14px rgba(229, 193, 88, 0.25);
+            background: var(--green-primary);
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(21, 128, 61, 0.25);
         }
 
         .primary:hover:not(:disabled) {
-            background: #F0D078;
+            background: var(--green-dark);
         }
 
         .secondary {
-            border: 2px solid var(--gold-muted);
-            color: var(--gold-light);
-            background: transparent;
+            border: 2px solid var(--green-border);
+            color: var(--green-dark);
+            background: var(--surface-light);
         }
 
         .secondary:hover:not(:disabled) {
-            background: rgba(229, 193, 88, 0.1);
+            background: #D8EFE2;
+            border-color: var(--green-primary);
         }
 
         /* Section Layouts */
@@ -182,18 +202,23 @@
         }
 
         .section-label {
-            color: var(--gold);
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            font-size: 0.85rem;
+            color: var(--green-primary);
+            background: var(--green-soft);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
             display: inline-block;
+            margin-bottom: 12px;
         }
 
         .section-title {
             font-size: clamp(2rem, 4vw, 3rem);
             line-height: 1.15;
-            margin: 12px 0 24px;
+            margin: 8px 0 20px;
             color: var(--text-primary);
+            font-weight: 800;
         }
 
         .section-lead {
@@ -228,8 +253,8 @@
             border-radius: 28px;
             overflow: hidden;
             height: 400px;
-            border: 1px solid var(--border-highlight);
-            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
         }
 
         .hero-image-wrapper img {
@@ -237,7 +262,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            filter: contrast(105%) brightness(95%);
             transition: transform 0.4s ease;
         }
 
@@ -248,7 +272,7 @@
         .hero-image-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(34, 11, 16, 0.1) 0%, rgba(34, 11, 16, 0.8) 100%);
+            background: linear-gradient(180deg, rgba(15, 81, 50, 0.05) 0%, rgba(15, 81, 50, 0.65) 100%);
             pointer-events: none;
         }
 
@@ -257,14 +281,14 @@
             bottom: 16px;
             left: 20px;
             right: 20px;
-            color: var(--gold-light);
+            color: #FFFFFF;
             font-size: 0.85rem;
             font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
             pointer-events: none;
         }
 
-        /* Big Idea Split */
+        /* The Big Idea */
         .split-layout {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -273,19 +297,20 @@
         }
 
         .idea-box {
-            background: #19080C;
-            border: 1px solid var(--border-highlight);
+            background: var(--surface-light);
+            border: 1px solid var(--green-border);
             color: var(--text-primary);
             padding: 40px;
             border-radius: var(--radius-lg);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-sm);
         }
 
         .idea-box h3 {
             font-size: 2rem;
             line-height: 1.2;
             margin-bottom: 16px;
-            color: var(--gold);
+            color: var(--green-dark);
+            font-weight: 800;
         }
 
         .idea-box p {
@@ -314,7 +339,7 @@
         }
 
         .step-card:hover {
-            border-color: var(--gold-muted);
+            border-color: var(--green-primary);
             transform: translateY(-3px);
         }
 
@@ -322,8 +347,8 @@
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: var(--gold);
-            color: #19080C;
+            background: var(--green-soft);
+            color: var(--green-primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -349,12 +374,13 @@
         }
 
         .statement h2 {
-            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
             color: var(--text-primary);
+            font-weight: 800;
         }
 
         .statement span {
-            color: var(--gold);
+            color: var(--green-primary);
         }
 
         /* Benefits Grid */
@@ -375,12 +401,13 @@
 
         .card:hover {
             transform: translateY(-4px);
-            border-color: var(--gold-muted);
+            border-color: var(--green-primary);
         }
 
         .card h3 {
             margin-bottom: 12px;
-            color: var(--gold-light);
+            color: var(--green-dark);
+            font-size: 1.25rem;
         }
 
         .card p {
@@ -388,7 +415,7 @@
         }
 
         /* ======================================================
-           INTERACTIVE WRITING & DIAGNOSTIC STUDIO WIDGET
+           WRITECRAFT INTERACTIVE STUDIO WIDGET
         ====================================================== */
         .studio-widget {
             background: var(--surface);
@@ -422,14 +449,14 @@
         .prompt-picker label {
             font-size: 0.85rem;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--green-dark);
             letter-spacing: 0.5px;
         }
 
         .prompt-select {
             padding: 10px 14px;
             border-radius: var(--radius-sm);
-            border: 1px solid var(--border-highlight);
+            border: 1px solid var(--border);
             background: var(--surface-elevated);
             color: var(--text-primary);
             font-family: inherit;
@@ -438,19 +465,19 @@
         }
 
         .drop-area {
-            border: 2px dashed var(--border-highlight);
+            border: 2px dashed var(--green-border);
             border-radius: var(--radius-md);
             padding: 18px 16px;
             text-align: center;
-            background: var(--surface-elevated);
+            background: var(--surface-light);
             transition: all 0.2s ease;
             cursor: pointer;
         }
 
         .drop-area:hover,
         .drop-area.dragover {
-            border-color: var(--gold);
-            background: #441A23;
+            border-color: var(--green-primary);
+            background: #DEF3E8;
         }
 
         .drop-area-icon {
@@ -464,7 +491,7 @@
         }
 
         .drop-area strong {
-            color: var(--text-primary);
+            color: var(--green-dark);
         }
 
         .hidden-file-input {
@@ -489,7 +516,7 @@
             height: 190px;
             padding: 14px;
             border-radius: 12px;
-            border: 1px solid var(--border-highlight);
+            border: 1px solid var(--border);
             background: var(--surface-elevated);
             color: var(--text-primary);
             font-family: inherit;
@@ -498,8 +525,13 @@
             line-height: 1.5;
         }
 
+        .studio-textarea:focus {
+            outline: none;
+            border-color: var(--green-primary);
+        }
+
         .studio-textarea::placeholder {
-            color: #9C7D84;
+            color: #94A3B8;
         }
 
         .status-box {
@@ -513,17 +545,17 @@
             display: block;
             background: var(--error-bg);
             color: var(--error);
-            border: 1px solid #781F28;
+            border: 1px solid #FECACA;
         }
 
         /* Right Column: Output & Controls */
         .studio-output-panel {
-            border: 1px solid var(--border-highlight);
+            border: 1px solid var(--border);
             border-radius: var(--radius-md);
             padding: 20px;
             display: flex;
             flex-direction: column;
-            background: var(--bg);
+            background: #FFFFFF;
             position: relative;
         }
 
@@ -547,14 +579,14 @@
             font-size: 0.85rem;
             font-weight: 700;
             letter-spacing: 0.5px;
-            color: var(--gold);
+            color: var(--green-dark);
         }
 
         .mode-select {
             padding: 8px 14px;
             border-radius: var(--radius-sm);
-            border: 1px solid var(--border-highlight);
-            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            background: var(--surface);
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-primary);
@@ -573,8 +605,8 @@
             font-size: 0.85rem;
             font-weight: 600;
             border-radius: var(--radius-sm);
-            border: 1px solid var(--border-highlight);
-            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            background: var(--surface);
             color: var(--text-secondary);
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
@@ -582,7 +614,8 @@
 
         .tool-btn:hover:not(:disabled) {
             background: var(--surface-light);
-            color: var(--gold-light);
+            color: var(--green-primary);
+            border-color: var(--green-border);
         }
 
         .dropdown-container {
@@ -593,9 +626,9 @@
             width: 38px;
             height: 38px;
             border-radius: var(--radius-sm);
-            border: 1px solid var(--border-highlight);
-            background: var(--surface-elevated);
-            color: var(--gold-light);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--green-dark);
             font-size: 1.25rem;
             line-height: 1;
             display: flex;
@@ -607,7 +640,7 @@
 
         .more-btn:hover:not(:disabled) {
             background: var(--surface-light);
-            border-color: var(--gold);
+            border-color: var(--green-primary);
         }
 
         .more-btn:disabled {
@@ -620,11 +653,11 @@
             top: calc(100% + 8px);
             right: 0;
             width: 220px;
-            background: #1D090D;
-            border: 1px solid var(--border-highlight);
+            background: #FFFFFF;
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 8px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+            box-shadow: var(--shadow-md);
             display: none;
             flex-direction: column;
             z-index: 50;
@@ -637,7 +670,7 @@
         .dropdown-header {
             font-size: 0.75rem;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--green-primary);
             letter-spacing: 1px;
             padding: 6px 12px 4px;
             text-transform: uppercase;
@@ -661,7 +694,7 @@
 
         .dropdown-item:hover {
             background: var(--surface-light);
-            color: var(--gold-light);
+            color: var(--green-dark);
         }
 
         .dropdown-divider {
@@ -705,13 +738,13 @@
 
         .loading-overlay p {
             font-weight: 600;
-            color: var(--gold-light);
+            color: var(--green-primary);
         }
 
         .progress-bar-container {
             width: 100%;
             height: 8px;
-            background: var(--surface-elevated);
+            background: var(--surface-light);
             border-radius: 999px;
             overflow: hidden;
         }
@@ -719,26 +752,26 @@
         .progress-bar-fill {
             width: 0%;
             height: 100%;
-            background: var(--gold);
+            background: var(--green-primary);
             transition: width 0.05s linear;
         }
 
         /* Mode 1: Presentation / Structured Flow */
         .presentation-card {
-            background: var(--surface);
-            border: 1px solid var(--border-highlight);
+            background: #FFFFFF;
+            border: 1px solid var(--green-border);
             border-radius: var(--radius-md);
             padding: 26px;
             width: 100%;
             max-width: 600px;
             min-height: 240px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            box-shadow: var(--shadow-sm);
         }
 
         .presentation-card .slide-tag {
             font-size: 0.75rem;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--green-primary);
             letter-spacing: 1px;
             margin-bottom: 8px;
         }
@@ -746,7 +779,7 @@
         .presentation-card h3 {
             font-size: 1.35rem;
             margin-bottom: 14px;
-            color: var(--text-primary);
+            color: var(--green-dark);
         }
 
         .presentation-card p {
@@ -782,32 +815,32 @@
             height: 100%;
             backface-visibility: hidden;
             border-radius: var(--radius-md);
-            border: 1px solid var(--border-highlight);
+            border: 1px solid var(--green-border);
             padding: 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            box-shadow: var(--shadow-sm);
         }
 
         .flashcard-front {
-            background: var(--surface);
+            background: #FFFFFF;
             color: var(--text-primary);
         }
 
         .flashcard-back {
-            background: #140508;
-            border-color: var(--gold-muted);
-            color: var(--text-primary);
+            background: var(--surface-light);
+            border-color: var(--green-primary);
+            color: var(--green-dark);
             transform: rotateY(180deg);
         }
 
         .card-hint {
             font-size: 0.75rem;
             margin-top: 12px;
-            color: var(--gold-muted);
+            color: var(--green-primary);
             font-weight: 600;
         }
 
@@ -815,11 +848,11 @@
         .diagnostic-view {
             width: 100%;
             max-width: 620px;
-            background: var(--surface);
-            border: 1px solid var(--border-highlight);
+            background: #FFFFFF;
+            border: 1px solid var(--green-border);
             border-radius: var(--radius-md);
             padding: 24px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            box-shadow: var(--shadow-sm);
         }
 
         .diagnostic-stats {
@@ -830,7 +863,7 @@
         }
 
         .stat-badge {
-            background: var(--surface-elevated);
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             padding: 10px;
@@ -847,12 +880,12 @@
 
         .stat-badge strong {
             font-size: 1.3rem;
-            color: var(--gold);
+            color: var(--green-primary);
         }
 
         .diagnostic-insights {
-            background: #19080C;
-            border-left: 4px solid var(--gold);
+            background: var(--surface-light);
+            border-left: 4px solid var(--green-primary);
             padding: 14px 16px;
             border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
             font-size: 0.95rem;
@@ -877,8 +910,8 @@
         .nav-arrow-btn {
             padding: 8px 16px;
             border-radius: var(--radius-sm);
-            border: 1px solid var(--border-highlight);
-            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            background: var(--surface);
             color: var(--text-secondary);
             font-weight: bold;
             cursor: pointer;
@@ -886,7 +919,8 @@
 
         .nav-arrow-btn:hover:not(:disabled) {
             background: var(--surface-light);
-            color: var(--gold-light);
+            color: var(--green-primary);
+            border-color: var(--green-border);
         }
 
         .nav-arrow-btn:disabled {
@@ -897,9 +931,9 @@
         .progress-pill {
             font-size: 0.85rem;
             font-weight: 700;
-            color: var(--gold-light);
-            background: var(--surface-elevated);
-            border: 1px solid var(--border-highlight);
+            color: var(--green-dark);
+            background: var(--green-soft);
+            border: 1px solid var(--green-border);
             padding: 4px 12px;
             border-radius: 999px;
         }
@@ -914,8 +948,8 @@
             width: 28px;
             height: 28px;
             border-radius: 6px;
-            border: 1px solid var(--border-highlight);
-            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            background: var(--surface);
             color: var(--text-secondary);
             font-size: 0.75rem;
             font-weight: 700;
@@ -927,16 +961,16 @@
         }
 
         .jump-dot:hover {
-            border-color: var(--gold);
+            border-color: var(--green-primary);
         }
 
         .jump-dot.active {
-            background: var(--gold);
-            color: #19080C;
-            border-color: var(--gold);
+            background: var(--green-primary);
+            color: #FFFFFF;
+            border-color: var(--green-primary);
         }
 
-        /* Why It Matters / Insights */
+        /* Insights & Why It Matters */
         .future-header {
             max-width: 780px;
             margin-bottom: 40px;
@@ -959,7 +993,7 @@
 
         .matter-card:hover {
             transform: translateY(-3px);
-            border-color: var(--gold-muted);
+            border-color: var(--green-primary);
         }
 
         .matter-icon {
@@ -971,7 +1005,7 @@
         .matter-card h3 {
             font-size: 1.25rem;
             margin-bottom: 12px;
-            color: var(--text-primary);
+            color: var(--green-dark);
         }
 
         .matter-card p {
@@ -981,8 +1015,8 @@
         }
 
         .research-banner {
-            background: #1A070B;
-            border: 1px solid var(--gold-muted);
+            background: var(--surface-light);
+            border: 1px solid var(--green-border);
             border-radius: 16px;
             padding: 24px 30px;
             display: flex;
@@ -991,8 +1025,8 @@
         }
 
         .banner-badge {
-            background: var(--gold);
-            color: #1A070B;
+            background: var(--green-primary);
+            color: #FFFFFF;
             font-size: 0.75rem;
             font-weight: 800;
             letter-spacing: 1px;
@@ -1013,6 +1047,7 @@
             padding: 40px 20px;
             border-top: 1px solid var(--border);
             color: var(--text-muted);
+            background: #FFFFFF;
         }
 
         /* Responsive Breakpoints */
@@ -1070,15 +1105,6 @@
             }
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T33T81PECL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-T33T81PECL');
-</script>
 </head>
 <body>
 
@@ -1088,13 +1114,16 @@
 <header>
     <div class="container">
         <nav aria-label="Main Navigation">
-            <a href="#" class="logo">Visual <span>Learning</span></a>
+            <a href="#" class="logo">
+                <span class="logo-icon">🌿</span>
+                WriteCraft
+            </a>
             <ul class="nav-links">
-                <li><a href="#story">The Story</a></li>
-                <li><a href="#idea">The Big Idea</a></li>
-                <li><a href="#journey">The Journey</a></li>
-                <li><a href="#benefits">The Benefits</a></li>
-                <li><a href="#studio">Visual Studio</a></li>
+                <li><a href="#story">The Mission</a></li>
+                <li><a href="#idea">The Framework</a></li>
+                <li><a href="#journey">The Workflow</a></li>
+                <li><a href="#benefits">The Edge</a></li>
+                <li><a href="#studio">Interactive Studio</a></li>
                 <li><a href="#insights">Why It Matters</a></li>
             </ul>
         </nav>
@@ -1109,41 +1138,41 @@
             <span class="section-label">WRITING • CREATIVITY • SYNTHESIS</span>
             <h1 class="section-title">Every great idea begins with understanding.</h1>
             <p>
-                Visual learning helps writers, learners, and creators translate messy thoughts, technical requirements, and complex prose into clear, structured, and confident execution.
+                WriteCraft empowers writers, researchers, and creators to transform raw thoughts, technical arguments, and complex drafts into clear, structured, and confident prose.
             </p>
             <div class="buttons">
-                <a href="#journey" class="btn primary">Explore the Journey</a>
-                <a href="#studio" class="btn secondary">Open Visual Studio</a>
+                <a href="#journey" class="btn primary">Explore the Workflow</a>
+                <a href="#studio" class="btn secondary">Open Interactive Studio</a>
             </div>
         </div>
 
         <div class="hero-image-wrapper">
             <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" 
-                 alt="Writer and student focused at a laptop synthesizing concepts" 
+                 alt="Writer focused at a modern workstation refining draft concepts" 
                  loading="eager">
             <div class="hero-image-overlay"></div>
-            <div class="hero-image-caption">Active composition and critical synthesis</div>
+            <div class="hero-image-caption">Active composition and critical synthesis in action</div>
         </div>
     </section>
 
     <!-- The Big Idea -->
     <section id="idea">
         <div class="container">
-            <span class="section-label">THE BIG IDEA</span>
+            <span class="section-label">THE FRAMEWORK</span>
             <h2 class="section-title">Writing is more than the finished draft.</h2>
             <div class="split-layout">
                 <div class="idea-box">
                     <h3>What happens before mastery?</h3>
                     <p>
-                        True growth happens through the friction of drafting: testing arguments, questioning structures, making mistakes, and refining intuition.
+                        Growth happens through the active friction of composition: testing hypotheses, adjusting narrative pacing, identifying syntax gaps, and discovering your distinctive voice.
                     </p>
                 </div>
                 <div>
                     <p>
-                        We often judge writing only by its final polish. But genuine communication develops through the iterative process of connecting unorganized ideas into structured thought.
+                        We often praise only the polished final copy. But true communication competence develops through the iterative process of connecting unorganized ideas into clear, logical chains.
                     </p>
                     <p>
-                        Visual tools accelerate this development by mapping out ideas, key transitions, and semantic relationships on a single interactive canvas.
+                        Visual and diagnostic tools accelerate this loop by making argument depth, sentence complexity, and cognitive reliance transparent on a single responsive canvas.
                     </p>
                 </div>
             </div>
@@ -1153,33 +1182,33 @@
     <!-- The Journey -->
     <section id="journey">
         <div class="container">
-            <span class="section-label">THE JOURNEY</span>
-            <h2 class="section-title">How clarity takes shape</h2>
+            <span class="section-label">THE WORKFLOW</span>
+            <h2 class="section-title">How authentic clarity takes shape</h2>
             <div class="journey-grid">
                 <article class="step-card">
                     <div class="step-number" aria-hidden="true">01</div>
                     <h3>Discover</h3>
-                    <p>Encountering the blank page and clarifying the core thesis.</p>
+                    <p>Facing the blank page and framing the primary thesis statement.</p>
                 </article>
                 <article class="step-card">
                     <div class="step-number" aria-hidden="true">02</div>
                     <h3>Explore</h3>
-                    <p>Gathering points, framing questions, and finding initial evidence.</p>
+                    <p>Gathering evidence, outlining arguments, and identifying key themes.</p>
                 </article>
                 <article class="step-card">
                     <div class="step-number" aria-hidden="true">03</div>
                     <h3>Draft</h3>
-                    <p>Writing unassisted to uncover authentic reasoning and flow.</p>
+                    <p>Writing unassisted to establish genuine personal cadence and flow.</p>
                 </article>
                 <article class="step-card">
                     <div class="step-number" aria-hidden="true">04</div>
                     <h3>Refine</h3>
-                    <p>Polishing syntax, strengthening coherence, and removing clutter.</p>
+                    <p>Evaluating automated feedback, tightening grammar, and enriching style.</p>
                 </article>
                 <article class="step-card">
                     <div class="step-number" aria-hidden="true">05</div>
                     <h3>Master</h3>
-                    <p>Communicating with confidence, authenticity, and precision.</p>
+                    <p>Communicating with precision, nuance, and lasting independence.</p>
                 </article>
             </div>
         </div>
@@ -1193,33 +1222,33 @@
     <!-- Benefits -->
     <section id="benefits">
         <div class="container">
-            <span class="section-label">THE BENEFITS</span>
-            <h2 class="section-title">Why structured composition works</h2>
+            <span class="section-label">THE EDGE</span>
+            <h2 class="section-title">Why intentional composition works</h2>
             <div class="benefits-grid">
                 <div class="card">
-                    <h3>Deepen Critical Retention</h3>
-                    <p>Structuring ideas manually reinforces semantic connections directly in long-term memory.</p>
+                    <h3>Deepen Cognitive Retention</h3>
+                    <p>Structuring ideas independently solidifies argument flow directly into long-term memory.</p>
                 </div>
                 <div class="card">
-                    <h3>Balance Cognitive Load</h3>
-                    <p>Visual outlining separates high-level ideation from line-by-line syntax, reducing mental fatigue.</p>
+                    <h3>Prevent Skill Atrophy</h3>
+                    <p>Using diagnostic tools as learning tutors rather than full auto-generators keeps critical thinking sharp.</p>
                 </div>
                 <div class="card">
-                    <h3>Protect Authentic Voice</h3>
-                    <p>Active drafting ensures that personal tone and unique perspective remain at the core of your text.</p>
+                    <h3>Protect Your Authentic Voice</h3>
+                    <p>Deliberate editing ensures that personal tone and distinct stylistic choices remain front and center.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ======================================================
-         INTERACTIVE VISUAL STUDIO WIDGET
+         INTERACTIVE WRITECRAFT STUDIO WIDGET
     ====================================================== -->
     <section id="studio">
         <div class="container">
             <span class="section-label">INTERACTIVE STUDIO</span>
             <h2 class="section-title">Transform Ideas into Structured Insights</h2>
-            <p class="section-lead">Drop your text below or load a preset prompt to generate structured concept cards, study flashcards, or a live diagnostic assessment.</p>
+            <p class="section-lead">Drop your text below or load a preset topic to generate concept cards, active recall flashcards, or a live diagnostic assessment.</p>
 
             <div class="studio-widget">
                 <div class="studio-grid">
@@ -1279,19 +1308,19 @@
                                         <div class="dropdown-header">Export Format</div>
                                         <button type="button" class="dropdown-item" role="menuitem" onclick="exportAs('txt')">
                                             <span>Text Document</span>
-                                            <span style="color:var(--gold-muted); font-size:0.75rem;">.TXT</span>
+                                            <span style="color:var(--green-primary); font-size:0.75rem;">.TXT</span>
                                         </button>
                                         <button type="button" class="dropdown-item" role="menuitem" onclick="exportAs('md')">
                                             <span>Markdown</span>
-                                            <span style="color:var(--gold-muted); font-size:0.75rem;">.MD</span>
+                                            <span style="color:var(--green-primary); font-size:0.75rem;">.MD</span>
                                         </button>
                                         <button type="button" class="dropdown-item" role="menuitem" onclick="exportAs('html')">
                                             <span>Standalone Page</span>
-                                            <span style="color:var(--gold-muted); font-size:0.75rem;">.HTML</span>
+                                            <span style="color:var(--green-primary); font-size:0.75rem;">.HTML</span>
                                         </button>
                                         <button type="button" class="dropdown-item" role="menuitem" onclick="exportAs('json')">
                                             <span>Structured Data</span>
-                                            <span style="color:var(--gold-muted); font-size:0.75rem;">.JSON</span>
+                                            <span style="color:var(--green-primary); font-size:0.75rem;">.JSON</span>
                                         </button>
                                         <div class="dropdown-divider"></div>
                                         <button type="button" class="dropdown-item" role="menuitem" onclick="printStudioContent()">
@@ -1308,13 +1337,13 @@
 
                             <!-- Initial Placeholder -->
                             <div class="stage-placeholder" id="placeholderView">
-                                <span>🎨</span>
-                                <p>Generated visual content and diagnostics will appear here.</p>
+                                <span>🌿</span>
+                                <p>Generated visual modules and diagnostic evaluations will render here.</p>
                             </div>
 
                             <!-- Progress Animation Overlay -->
                             <div class="loading-overlay" id="loadingView">
-                                <p>Analyzing ideas and synthesizing components...</p>
+                                <p>Synthesizing insights and checking lexical distribution...</p>
                                 <div class="progress-bar-container">
                                     <div class="progress-bar-fill" id="progressBar"></div>
                                 </div>
@@ -1348,7 +1377,7 @@
                 <span class="section-label">WHY IT MATTERS</span>
                 <h2 class="section-title">The "Show, Don't Tell" Shift in Modern Writing</h2>
                 <p class="section-lead">
-                    Whether synthesizing research or organizing multi-layered arguments, linear prose is stronger when supported by visual models. Turning abstract drafts into visual maps turns confusion into durable, actionable insight.
+                    Whether constructing essays or breaking down research, linear text is always stronger when supported by clear visual models. Transforming abstract paragraphs into structural milestones turns confusion into lasting insight.
                 </p>
             </div>
 
@@ -1357,7 +1386,7 @@
                     <div class="matter-icon" aria-hidden="true">🧠</div>
                     <h3>Bypassing Cognitive Friction</h3>
                     <p>
-                        Converting unstructured brainstorming into sequential cards allows writers to evaluate logic without being bogged down by line-level spelling or punctuation.
+                        Converting unstructured brainstorming into sequential cards allows writers to evaluate logic and flow without getting bogged down in line-level punctuation.
                     </p>
                 </article>
 
@@ -1365,7 +1394,7 @@
                     <div class="matter-icon" aria-hidden="true">🎯</div>
                     <h3>Confidence Over Automation</h3>
                     <p>
-                        Using tools to visualize ideas rather than write them prevents reliance on generic automated text, preserving your original voice and critical edge.
+                        Using tools to visualize ideas rather than generate entire drafts preserves your original perspective and prevents over-reliance on generic AI prose.
                     </p>
                 </article>
 
@@ -1373,7 +1402,7 @@
                     <div class="matter-icon" aria-hidden="true">🔍</div>
                     <h3>Spotting Logic Gaps Instantly</h3>
                     <p>
-                        When arguments are structured into standalone checkpoints, weak assumptions, missing transitions, and repetitive claims become immediately visible.
+                        When arguments are displayed as standalone milestones, missing transitions, weak evidence, and repetitive patterns become instantly recognizable.
                     </p>
                 </article>
 
@@ -1381,15 +1410,15 @@
                     <div class="matter-icon" aria-hidden="true">⚖️</div>
                     <h3>The Power of Hybrid Thinking</h3>
                     <p>
-                        The most durable communicators combine visual structure with expressive writing—achieving both architectural clarity and genuine human resonance.
+                        The most durable communicators pair structural scaffolding with expressive prose—achieving architectural clarity without losing emotional depth.
                     </p>
                 </article>
             </div>
 
             <div class="research-banner">
-                <div class="banner-badge">CORE TAKEAWAY</div>
+                <div class="banner-badge">CORE PRINCIPLE</div>
                 <p>
-                    <strong>Keep the Human at the Center:</strong> Leverage technology to organize, visualize, and question your ideas—while keeping your creative judgment, voice, and perspective in control.
+                    <strong>Keep the Author in Control:</strong> Leverage smart diagnostics to organize, challenge, and refine your arguments—while keeping your authentic judgment in the driver's seat.
                 </p>
             </div>
         </div>
@@ -1400,7 +1429,7 @@
 <!-- Footer -->
 <footer>
     <div class="container">
-        <p>Visual Learning Studio • An Interactive Platform for Writers and Thinkers</p>
+        <p>WriteCraft • An Interactive Platform for Writers, Thinkers, and Researchers</p>
     </div>
 </footer>
 
@@ -1434,7 +1463,6 @@
     let activeDataset = [];
     let currentIndex = 0;
 
-    // Load initial preset
     window.addEventListener("DOMContentLoaded", () => {
         handlePresetPick();
     });
@@ -1460,7 +1488,7 @@
         charCounter.style.color = len > 3000 ? "var(--error)" : "var(--text-muted)";
     }
 
-    // Drag & Drop Handling
+    // Drag & Drop
     dropArea.addEventListener("click", () => fileInput.click());
     dropArea.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") fileInput.click();
@@ -1513,7 +1541,7 @@
         statusMessage.className = "status-box";
     }
 
-    // Content Generation Engine
+    // Generation Engine
     function handleGenerateAction() {
         const text = lessonTextInput.value.trim();
 
@@ -1532,7 +1560,6 @@
 
         clearError();
 
-        // Progress Animation
         placeholderView.style.display = "none";
         activeRenderContainer.style.display = "none";
         bottomNavControls.style.display = "none";
@@ -1578,7 +1605,7 @@
                 const wordsList = sentence.split(" ");
                 const prompt = wordsList.slice(0, 4).join(" ") + "...";
                 activeDataset.push({
-                    front: `Idea Checkpoint #${idx + 1}`,
+                    front: `Argument Milestone #${idx + 1}`,
                     prompt: prompt,
                     back: sentence
                 });
@@ -1588,12 +1615,12 @@
             const lexicalDensity = Math.round((uniqueWords.size / Math.max(1, words.length)) * 100);
             const avgSentenceLen = Math.round(words.length / Math.max(1, sentences.length));
 
-            let offloadScore = "Low (Authentic)";
-            let observation = "Your writing demonstrates independent syntax and individual structure with low risk of cognitive offloading.";
+            let offloadScore = "Low (Authentic Voice)";
+            let observation = "Your writing demonstrates strong independent syntax with healthy lexical variation and low reliance on generic template phrasing.";
 
-            if (rawText.length > 500 && lexicalDensity < 45) {
-                offloadScore = "Elevated";
-                observation = "Repetitive patterns detected. Consider varying transition words and establishing clearer contrasts manually.";
+            if (rawText.length > 400 && lexicalDensity < 48) {
+                offloadScore = "Moderate Offloading Risk";
+                observation = "Repetitive sentence structures detected. Consider varying transition phrasing and integrating sharper, active verbs.";
             }
 
             activeDataset.push({
@@ -1636,13 +1663,13 @@
             scene.innerHTML = `
                 <div class="flashcard-object" onclick="this.classList.toggle('is-flipped')">
                     <div class="flashcard-face flashcard-front">
-                        <span class="slide-tag" style="color:var(--gold); font-size:0.75rem; font-weight:700;">${item.front}</span>
+                        <span class="slide-tag" style="color:var(--green-primary); font-size:0.75rem; font-weight:700;">${item.front}</span>
                         <h3 style="margin-top:10px; color:var(--text-primary); font-size:1.15rem;">${item.prompt}</h3>
-                        <p class="card-hint">Click or tap to reveal insight ↻</p>
+                        <p class="card-hint">Click or tap to reveal full argument ↻</p>
                     </div>
                     <div class="flashcard-face flashcard-back">
-                        <span class="slide-tag" style="color:var(--gold); font-size:0.75rem; font-weight:700;">FULL PERSPECTIVE</span>
-                        <p style="margin-top:10px; color:var(--text-secondary); font-size:0.95rem;">${item.back}</p>
+                        <span class="slide-tag" style="color:var(--green-primary); font-size:0.75rem; font-weight:700;">FULL PERSPECTIVE</span>
+                        <p style="margin-top:10px; color:var(--green-dark); font-size:0.95rem;">${item.back}</p>
                         <p class="card-hint">Click to flip back</p>
                     </div>
                 </div>
@@ -1653,8 +1680,8 @@
             diag.className = "diagnostic-view";
             diag.innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                    <h3 style="color:var(--text-primary); margin:0;">Voice & Synthesis Assessment</h3>
-                    <span class="banner-badge" style="background:var(--gold);">${item.offload}</span>
+                    <h3 style="color:var(--green-dark); margin:0;">Voice & Synthesis Assessment</h3>
+                    <span class="banner-badge">${item.offload}</span>
                 </div>
                 <div class="diagnostic-stats">
                     <div class="stat-badge"><span>Total Words</span><strong>${item.wordCount}</strong></div>
@@ -1723,7 +1750,7 @@
         clearError();
     }
 
-    // 3-Dot Export Menu
+    // Export Dropdown
     function toggleExportMenu(e) {
         e.stopPropagation();
         const isShowing = exportMenu.classList.toggle("show");
@@ -1752,10 +1779,10 @@
         const mode = learningModeSelect.value;
         let content = "";
         let mimeType = "text/plain";
-        let filename = `visual-learning-${mode}.${format}`;
+        let filename = `writecraft-${mode}.${format}`;
 
         if (format === "txt") {
-            content = `VISUAL LEARNING EXPORT\nMode: ${mode.toUpperCase()}\n\n`;
+            content = `WRITECRAFT STUDIO EXPORT\nMode: ${mode.toUpperCase()}\n\n`;
             activeDataset.forEach((item, i) => {
                 content += `--- ITEM ${i + 1} ---\n`;
                 if (item.title) content += `Title: ${item.title}\nContent: ${item.body}\n\n`;
@@ -1763,7 +1790,7 @@
                 if (item.analysis) content += `Analysis: ${item.analysis}\nWords: ${item.wordCount}\n\n`;
             });
         } else if (format === "md") {
-            content = `# Visual Learning Export: ${mode.toUpperCase()}\n\n`;
+            content = `# WriteCraft Studio Export: ${mode.toUpperCase()}\n\n`;
             activeDataset.forEach((item, i) => {
                 content += `## Card ${i + 1}\n\n`;
                 if (item.title) content += `### ${item.title}\n\n${item.body}\n\n---\n\n`;
@@ -1775,7 +1802,7 @@
             content = JSON.stringify({ mode: mode, items: activeDataset }, null, 2);
             mimeType = "application/json";
         } else if (format === "html") {
-            content = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Visual Learning Export</title><style>body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.6;background:#220B10;color:#E8D6D9;}.card{background:#2E1218;border:1px solid #703340;border-radius:12px;padding:24px;margin-bottom:20px;}h1,h2,h3{color:#E5C158;}</style></head><body><h1>Visual Learning Export (${mode})</h1><hr>${activeDataset.map((it, idx) => `<div class="card"><h2>Item ${idx+1}</h2><p>${it.body || it.back || it.analysis}</p></div>`).join('')}</body></html>`;
+            content = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>WriteCraft Export</title><style>body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.6;background:#FFFFFF;color:#1E293B;}.card{background:#F8FAF9;border:1px solid #BBF7D0;border-radius:12px;padding:24px;margin-bottom:20px;}h1,h2,h3{color:#15803D;}</style></head><body><h1>WriteCraft Studio Export (${mode})</h1><hr>${activeDataset.map((it, idx) => `<div class="card"><h2>Item ${idx+1}</h2><p>${it.body || it.back || it.analysis}</p></div>`).join('')}</body></html>`;
             mimeType = "text/html";
         }
 
