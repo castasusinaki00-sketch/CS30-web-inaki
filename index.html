@@ -53,7 +53,7 @@
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
-            /* Subtle layered backdrop texture of a student writing on paper with a soft white overlay */
+            /* Layered backdrop texture of a student writing on paper with a soft white overlay */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)),
                 url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80');
@@ -147,15 +147,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 24px;
+            gap: 20px;
             list-style: none;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-secondary);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             transition: color 0.2s;
         }
 
@@ -211,7 +212,7 @@
 
         /* Section Layouts */
         section {
-            padding: 90px 0;
+            padding: 85px 0;
             scroll-margin-top: 80px;
         }
 
@@ -1053,6 +1054,159 @@
             border-color: var(--green-primary);
         }
 
+        /* ======================================================
+           CURATED ARTICLES & PEDAGOGY SECTION
+        ====================================================== */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .article-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--green-primary);
+            margin-bottom: 8px;
+        }
+
+        .article-card h3 {
+            font-size: 1.25rem;
+            color: var(--green-dark);
+            margin-bottom: 12px;
+            line-height: 1.35;
+        }
+
+        .article-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .article-meta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ======================================================
+           GLOSSARY GRID
+        ====================================================== */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .glossary-card {
+            background: rgba(248, 250, 249, 0.94);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 22px;
+        }
+
+        .glossary-card h4 {
+            color: var(--green-dark);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .glossary-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* ======================================================
+           INTERACTIVE FAQ ACCORDION
+        ====================================================== */
+        .faq-accordion {
+            max-width: 860px;
+            margin: 32px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 18px 24px;
+            background: transparent;
+            border: none;
+            text-align: left;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        .faq-question:hover {
+            background: var(--surface-light);
+        }
+
+        .faq-icon {
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .faq-answer {
+            padding: 0 24px 20px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
         /* Insights & Why It Matters */
         .future-header {
             max-width: 780px;
@@ -1202,6 +1356,12 @@
             .video-strip-grid {
                 grid-template-columns: 1fr;
             }
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            .glossary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1209,7 +1369,8 @@
             .split-layout,
             .benefits-grid,
             .journey-grid,
-            .matters-grid {
+            .matters-grid,
+            .glossary-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1221,7 +1382,7 @@
             .nav-links {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 16px;
+                gap: 14px;
             }
 
             .hero-video-wrapper {
@@ -1275,8 +1436,10 @@
                 <li><a href="#story">The Mission</a></li>
                 <li><a href="#idea">The Framework</a></li>
                 <li><a href="#journey">The Workflow</a></li>
-                <li><a href="#benefits">The Edge</a></li>
                 <li><a href="#studio">Interactive Studio</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#glossary">Glossary</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#insights">Why It Matters</a></li>
             </ul>
         </nav>
@@ -1552,6 +1715,149 @@
                             <ul class="page-jump-links" id="pageDots" aria-label="Skip to card"></ul>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================
+         CURATED ARTICLES & ESSAY PERSPECTIVES
+    ====================================================== -->
+    <section id="articles">
+        <div class="container">
+            <span class="section-label">WRITECRAFT ESSAYS</span>
+            <h2 class="section-title">Perspectives on Thought & Composition</h2>
+            <p class="section-lead">Short examinations of how authors maintain genuine style, intellectual ownership, and cognitive agility alongside machine intelligence.</p>
+
+            <div class="articles-grid">
+                <!-- Article 1 -->
+                <article class="article-card">
+                    <div>
+                        <span class="article-tag">Cognitive Architecture</span>
+                        <h3>The Scaffolding Paradox: Why Easy Drafts Stunt Writing Muscle</h3>
+                        <p>
+                            Generating an instantaneous outline via LLMs offers relief against immediate deadlines, but it deprives the brain of essential inductive structuring. True clarity is born not from receiving a structure, but from wrestling raw thoughts into one.
+                        </p>
+                    </div>
+                    <div class="article-meta">
+                        <span>Read Time: 3 mins</span>
+                        <span>Topic: Cognitive Offloading</span>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <div>
+                        <span class="article-tag">Voice & Style</span>
+                        <h3>The Syntax Fingerprint: Why Algorithmic Polish Normalizes You</h3>
+                        <p>
+                            Automated grammar editors prioritize normative predictability. While technically clean, over-polished prose eliminates the distinctive cadences, pauses, and passionate vulnerability that distinguish memorable personal essays from generic copy.
+                        </p>
+                    </div>
+                    <div class="article-meta">
+                        <span>Read Time: 4 mins</span>
+                        <span>Topic: Linguistic Autonomy</span>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <div>
+                        <span class="article-tag">Methodology</span>
+                        <h3>The 70/30 Hybrid Rule: A Sustainable Workflow for Modern Authors</h3>
+                        <p>
+                            Top digital communicators don't banish technology—they boundary it. Dedicate 70% of drafting effort to unassisted manual reflection and thesis architecture, reserving the final 30% for AI diagnostics, tone-checking, and counterargument stress-tests.
+                        </p>
+                    </div>
+                    <div class="article-meta">
+                        <span>Read Time: 3 mins</span>
+                        <span>Topic: Writing Playbook</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================
+         GLOSSARY: THE METRICS OF COMPOSITION
+    ====================================================== -->
+    <section id="glossary" style="background: rgba(248, 250, 249, 0.7); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+        <div class="container">
+            <span class="section-label">KEY TERMS</span>
+            <h2 class="section-title">Writing Diagnostics Glossary</h2>
+            <p class="section-lead">Understanding the metrics that define whether an essay retains personal authenticity or slips into automated dependency.</p>
+
+            <div class="glossary-grid">
+                <div class="glossary-card">
+                    <h4><span>📊</span> Lexical Variety</h4>
+                    <p>The proportion of unique words to total word count (Type-Token Ratio). High diversity signals rich personal vocabulary, while low scores indicate repetitive phrasing.</p>
+                </div>
+                <div class="glossary-card">
+                    <h4><span>🧠</span> Cognitive Offloading</h4>
+                    <p>The practice of relying on automated tools to carry mental labor (outlining, ideation, syntax) rather than exercising internal critical reasoning.</p>
+                </div>
+                <div class="glossary-card">
+                    <h4><span>⚖️</span> The Confidence Gap</h4>
+                    <p>The psychological disparity where a writer scores well with AI assistance but experiences acute anxiety when tasked with composing an essay unassisted.</p>
+                </div>
+                <div class="glossary-card">
+                    <h4><span>🔍</span> Syntactic Density</h4>
+                    <p>The ratio of clauses and complex sentence constructions. Varied syntactic density creates organic rhythm; uniform density sounds mechanical.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================
+         FREQUENTLY ASKED QUESTIONS (ACCORDION)
+    ====================================================== -->
+    <section id="faq">
+        <div class="container">
+            <div style="text-align: center; max-width: 680px; margin: 0 auto 30px;">
+                <span class="section-label">COMMUNITY FAQ</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-lead">Practical advice for students, creators, and professionals balancing writing rigor with generative AI.</p>
+            </div>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                        <span>Should I ever use AI to generate my initial essay outline?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We recommend drafting a 3-point bullet outline manually first. Once you know your personal conviction, consult AI to identify counterarguments or blind spots you might have overlooked. If you generate the outline first, you unconsciously adopt the model's perspective rather than discovering your own.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                        <span>How can I tell if my writing is becoming too dependent on AI?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>A simple test: Sit down with a blank sheet of paper and a pen, set a 10-minute timer, and write on your topic. If you experience paralysis or can't initiate sentences without an autocomplete prompt, you are likely experiencing cognitive offloading. Regular timed freewrites quickly rebuild this mental stamina.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is the best way to polish an essay without losing my voice?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Never accept full paragraph replacements. Ask your AI assistant for specific grammar flags, passive voice callouts, or alternative transition words. Choose and type the corrections manually so the rhythm remains natural to your speaking cadence.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does WriteCraft's diagnostic calculate lexical distribution?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>WriteCraft analyzes the ratio of distinct lemmas against the total word count, evaluates average sentence length, and flags syntactic repetition. It highlights whether your piece reflects organic human variation or the balanced neutrality characteristic of automated text.</p>
                     </div>
                 </div>
             </div>
@@ -2080,6 +2386,23 @@
         trackStudioEvent('print_export', 'Studio Export', learningModeSelect.value);
         exportMenu.classList.remove("show");
         window.print();
+    }
+
+    /* ======================================================
+       FAQ ACCORDION TOGGLE HANDLER
+    ====================================================== */
+    function toggleFaq(button) {
+        const item = button.closest('.faq-item');
+        const isActive = item.classList.contains('active');
+        
+        // Close other items
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+        
+        // Toggle selected item
+        if (!isActive) {
+            item.classList.add('active');
+            trackStudioEvent('toggle_faq', 'FAQ Section', button.querySelector('span').innerText);
+        }
     }
 </script>
 
