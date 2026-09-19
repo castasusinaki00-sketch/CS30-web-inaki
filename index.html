@@ -262,7 +262,7 @@
             gap: 16px;
         }
 
-        .hero-image-wrapper {
+        .hero-video-wrapper {
             position: relative;
             border-radius: 28px;
             overflow: hidden;
@@ -272,7 +272,7 @@
             background: #FFFFFF;
         }
 
-        .hero-image-wrapper img {
+        .hero-video-wrapper video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -280,8 +280,8 @@
             transition: transform 0.4s ease;
         }
 
-        .hero-image-wrapper:hover img {
-            transform: scale(1.03);
+        .hero-video-wrapper:hover video {
+            transform: scale(1.02);
         }
 
         .hero-image-overlay {
@@ -336,6 +336,70 @@
         .split-layout p {
             color: var(--text-secondary);
             margin-bottom: 16px;
+        }
+
+        .idea-video-card {
+            margin-top: 20px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--green-border);
+            box-shadow: var(--shadow-sm);
+            height: 180px;
+        }
+
+        .idea-video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Video Showcase Strip */
+        .video-strip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .video-clip-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-clip-container {
+            position: relative;
+            height: 220px;
+            background: #E2E8F0;
+        }
+
+        .video-clip-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-clip-body {
+            padding: 18px 20px;
+        }
+
+        .video-clip-body h4 {
+            color: var(--green-dark);
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .video-clip-body p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         /* Journey Grid */
@@ -1135,6 +1199,9 @@
             .studio-grid {
                 grid-template-columns: 1fr;
             }
+            .video-strip-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1157,7 +1224,7 @@
                 gap: 16px;
             }
 
-            .hero-image-wrapper {
+            .hero-video-wrapper {
                 height: 280px;
             }
 
@@ -1232,12 +1299,13 @@
             </div>
         </div>
 
-        <div class="hero-image-wrapper">
-            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80" 
-                 alt="Hand writing an essay with a pen on paper" 
-                 loading="eager">
+        <!-- Hero Video Clip: Hand writing an essay with a pen on paper -->
+        <div class="hero-video-wrapper">
+            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-hand-writing-in-a-notebook-with-a-pen-43200-large.mp4" type="video/mp4">
+            </video>
             <div class="hero-image-overlay"></div>
-            <div class="hero-image-caption">Active composition and critical synthesis in action</div>
+            <div class="hero-image-caption">Deliberate unassisted composition and thought drafting</div>
         </div>
     </section>
 
@@ -1252,6 +1320,11 @@
                     <p>
                         Growth happens through the active friction of composition: testing hypotheses, adjusting narrative pacing, identifying syntax gaps, and discovering your distinctive voice.
                     </p>
+                    <div class="idea-video-card">
+                        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80">
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-person-typing-on-a-laptop-keyboard-43187-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
                 <div>
                     <p>
@@ -1260,6 +1333,33 @@
                     <p>
                         Visual and diagnostic tools accelerate this loop by making argument depth, sentence complexity, and cognitive reliance transparent on a single responsive canvas.
                     </p>
+
+                    <!-- Dual Video Demonstration Showcase -->
+                    <div class="video-strip-grid">
+                        <div class="video-clip-card">
+                            <div class="video-clip-container">
+                                <video autoplay muted loop playsinline>
+                                    <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-working-on-a-laptop-43185-large.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-clip-body">
+                                <h4>Digital Drafting</h4>
+                                <p>Iterating on thesis outlines and sentence rhythm in modern web workspaces.</p>
+                            </div>
+                        </div>
+
+                        <div class="video-clip-card">
+                            <div class="video-clip-container">
+                                <video autoplay muted loop playsinline>
+                                    <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-writing-in-a-notebook-with-a-pen-43202-large.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-clip-body">
+                                <h4>Analog Reflection</h4>
+                                <p>Pen-to-paper freewriting to build starting momentum and voice clarity.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
