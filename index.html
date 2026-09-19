@@ -1444,6 +1444,22 @@
 
 <!-- Interactive Studio Engine -->
 <script>
+    /* ======================================================
+       GOOGLE ANALYTICS EVENT TRACKING HELPER
+    ====================================================== */
+    function trackStudioEvent(action, category, label = '', value = null) {
+        if (typeof gtag === 'function') {
+            const payload = {
+                event_category: category,
+                event_label: label
+            };
+            if (value !== null && !isNaN(value)) {
+                payload.value = value;
+            }
+            gtag('event', action, payload);
+        }
+    }
+
     const presets = {
         tech: "Technological convenience enhances daily productivity, but excessive reliance on automated tools risks eroding fundamental critical thinking. When writers delegate outlining and sentence synthesis entirely to algorithms, they experience cognitive offloading. Sustainable mastery requires balancing digital speed with deliberate, unassisted mental exercise.",
         education: "Standardized testing encourages superficial memorization rather than creative synthesis. Comprehensive portfolios and applied project evaluations provide a far richer representation of human capability, allowing learners to demonstrate active problem-solving and authentic insight.",
@@ -1473,10 +1489,10 @@
     let currentIndex = 0;
 
     window.addEventListener("DOMContentLoaded", () => {
-        handlePresetPick();
+        handlePresetPick(false);
     });
 
-    function handlePresetPick() {
+    function handlePresetPick(sendAnalytics = true) {
         const picker = document.getElementById("promptPicker");
         const val = presets[picker.value];
         if (val) {
@@ -1486,6 +1502,10 @@
         } else if (picker.value === "custom") {
             lessonTextInput.value = "";
             updateCharCount();
+        }
+
+        if (sendAnalytics) {
+            trackStudioEvent('select_prompt_preset', 'Studio Input', picker.value);
         }
     }
 
@@ -1498,9 +1518,15 @@
     }
 
     // Drag & Drop
-    dropArea.addEventListener("click", () => fileInput.click());
+    dropArea.addEventListener("click", () => {
+        trackStudioEvent('click_file_upload_area', 'Studio Input', 'File Upload Trigger');
+        fileInput.click();
+    });
     dropArea.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") fileInput.click();
+        if (e.key === "Enter" || e.key === " ") {
+            trackStudioEvent('keyboard_file_upload_area', 'Studio Input', 'File Upload Trigger');
+            fileInput.click();
+        }
     });
 
     ["dragenter", "dragover"].forEach(evt => {
@@ -1519,16 +1545,23 @@
 
     dropArea.addEventListener("drop", (e) => {
         const files = e.dataTransfer.files;
-        if (files.length > 0) handleFileSelection(files[0]);
+        if (files.length > 0) {
+            trackStudioEvent('file_drop', 'Studio Input', files[0].name);
+            handleFileSelection(files[0]);
+        }
     });
 
     fileInput.addEventListener("change", (e) => {
-        if (e.target.files.length > 0) handleFileSelection(e.target.files[0]);
+        if (e.target.files.length > 0) {
+            trackStudioEvent('file_browse_selected', 'Studio Input', e.target.files[0].name);
+            handleFileSelection(e.target.files[0]);
+        }
     });
 
     function handleFileSelection(file) {
         if (!file.name.endsWith(".txt")) {
             showError("Please upload a valid .txt text document.");
+            trackStudioEvent('file_upload_error', 'Studio Input', 'Invalid file type: ' + file.name);
             return;
         }
         const reader = new FileReader();
@@ -1536,6 +1569,7 @@
             lessonTextInput.value = e.target.result;
             updateCharCount();
             clearError();
+            trackStudioEvent('file_upload_success', 'Studio Input', file.name, file.size);
         };
         reader.readAsText(file);
     }
@@ -1556,18 +1590,23 @@
 
         if (text.length === 0) {
             showError("Please enter or paste some text first.");
+            trackStudioEvent('validation_error', 'Studio Generation', 'Empty input text');
             return;
         }
         if (text.length < 50) {
             showError("Text is too short. Please provide at least 50 characters.");
+            trackStudioEvent('validation_error', 'Studio Generation', 'Input under 50 characters');
             return;
         }
         if (text.length > 3000) {
             showError("Text exceeds the 3,000 character limit.");
+            trackStudioEvent('validation_error', 'Studio Generation', 'Input over 3000 characters');
             return;
         }
 
         clearError();
+
+        trackStudioEvent('generate_visual_output', 'Studio Generation', learningModeSelect.value, text.length);
 
         placeholderView.style.display = "none";
         activeRenderContainer.style.display = "none";
@@ -1670,7 +1709,7 @@
             const scene = document.createElement("div");
             scene.className = "flashcard-scene";
             scene.innerHTML = `
-                <div class="flashcard-object" onclick="this.classList.toggle('is-flipped')">
+                <div class="flashcard-object" onclick="toggleCardFlip(this, ${currentIndex + 1})">
                     <div class="flashcard-face flashcard-front">
                         <span class="slide-tag" style="color:var(--green-primary); font-size:0.75rem; font-weight:700;">${item.front}</span>
                         <h3 style="margin-top:10px; color:var(--text-primary); font-size:1.15rem;">${item.prompt}</h3>
@@ -1714,6 +1753,12 @@
         });
     }
 
+    function toggleCardFlip(element, cardNum) {
+        element.classList.toggle('is-flipped');
+        const isFlipped = element.classList.contains('is-flipped');
+        trackStudioEvent('flip_flashcard', 'Studio Interaction', `Card ${cardNum}: ${isFlipped ? 'Answer' : 'Prompt'}`);
+    }
+
     function renderPageJumpDots() {
         pageDots.innerHTML = "";
         if (activeDataset.length <= 1) return;
@@ -1724,6 +1769,7 @@
             li.textContent = idx + 1;
             li.setAttribute("aria-label", `Jump to item ${idx + 1}`);
             li.addEventListener("click", () => {
+                trackStudioEvent('click_pagination_dot', 'Studio Navigation', `Jump to card ${idx + 1}`);
                 currentIndex = idx;
                 renderCurrentItem();
             });
@@ -1734,18 +1780,22 @@
     function navigateStep(direction) {
         const newIdx = currentIndex + direction;
         if (newIdx >= 0 && newIdx < activeDataset.length) {
+            const dirLabel = direction > 0 ? 'Next' : 'Previous';
+            trackStudioEvent('click_nav_arrow', 'Studio Navigation', `${dirLabel} to Card ${newIdx + 1}`);
             currentIndex = newIdx;
             renderCurrentItem();
         }
     }
 
     function handleModeChange() {
+        trackStudioEvent('change_learning_mode', 'Studio Navigation', learningModeSelect.value);
         if (lessonTextInput.value.trim().length >= 50) {
             handleGenerateAction();
         }
     }
 
     function clearStudio() {
+        trackStudioEvent('clear_studio', 'Studio Actions', 'Reset Inputs and Stage');
         lessonTextInput.value = "";
         updateCharCount();
         activeDataset = [];
@@ -1764,6 +1814,7 @@
         e.stopPropagation();
         const isShowing = exportMenu.classList.toggle("show");
         exportMenuBtn.setAttribute("aria-expanded", isShowing);
+        trackStudioEvent('toggle_export_menu', 'Studio Export', isShowing ? 'Open Menu' : 'Close Menu');
     }
 
     document.addEventListener("click", (e) => {
@@ -1789,6 +1840,8 @@
         let content = "";
         let mimeType = "text/plain";
         let filename = `writecraft-${mode}.${format}`;
+
+        trackStudioEvent('export_file', 'Studio Export', `${mode} as .${format}`);
 
         if (format === "txt") {
             content = `WRITECRAFT STUDIO EXPORT\nMode: ${mode.toUpperCase()}\n\n`;
@@ -1823,6 +1876,7 @@
     }
 
     function printStudioContent() {
+        trackStudioEvent('print_export', 'Studio Export', learningModeSelect.value);
         exportMenu.classList.remove("show");
         window.print();
     }
