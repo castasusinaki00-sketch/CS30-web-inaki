@@ -1,0 +1,2663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Revised Meta Description (156 characters, includes Call-to-Action) -->
+    <meta name="description" content="Analyze your writing habits, track cognitive offloading, and compare manual drafts against AI polish. Try WriteCraft's free essay diagnostic studio today!">
+    <!-- Revised Title Tag (54 characters, primary keyword near front) -->
+    <title>AI Writing Diagnostic Tool & Essay Studio | WriteCraft</title>
+
+    <style>
+        :root {
+            /* Clean White Canvas with Rich Emerald and Forest Green Accents */
+            --bg: #F4F8F5;
+            --surface: #FFFFFF;
+            --surface-elevated: #FFFFFF;
+            --surface-light: #EAF3EE;
+
+            --green-primary: #15803D;      /* Vibrant Emerald */
+            --green-dark: #0F5132;         /* Deep Forest */
+            --green-soft: #D1FAE5;         /* Mint Accent Soft */
+            --green-border: #BBF7D0;
+
+            --text-primary: #0F172A;       /* High-contrast Slate */
+            --text-secondary: #334155;     /* Readable Body Charcoal */
+            --text-muted: #64748B;         /* Secondary Labels */
+
+            --border: #E2E8F0;
+            --border-highlight: #CBD5E1;
+            --focus-ring: #10B981;
+
+            --error: #DC2626;
+            --error-bg: #FEF2F2;
+            --success: #16A34A;
+            --warning: #D97706;
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 81, 50, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 20px 30px -10px rgba(15, 81, 50, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        /* Rest of the website: Soft aesthetic green background blended with faded white radial glows */
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #F3F8F5;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(209, 250, 229, 0.75) 0%, transparent 40%),
+                radial-gradient(circle at 90% 60%, rgba(187, 247, 208, 0.55) 0%, transparent 45%),
+                radial-gradient(circle at 50% 90%, rgba(220, 252, 231, 0.6) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(244, 249, 245, 0.95) 100%);
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Accessibility: Skip Link & Focus */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 20px;
+            background: var(--green-primary);
+            color: #FFFFFF;
+            padding: 10px 16px;
+            z-index: 999;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            transition: top 0.2s;
+        }
+
+        .skip-link:focus {
+            top: 20px;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--focus-ring);
+            outline-offset: 3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 24px;
+        }
+
+        /* HEADER: Uses pic.jpg as background with an elegant faded white-to-green translucent overlay */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            background-color: #FFFFFF;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.88), rgba(240, 253, 244, 0.92)),
+                url('assets/pic.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(15, 81, 50, 0.05);
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            text-align: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--green-dark);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .logo-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--green-soft);
+            color: var(--green-primary);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 6px rgba(15, 81, 50, 0.1);
+        }
+
+        .logo span {
+            color: var(--green-primary);
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 650;
+            font-size: 0.92rem;
+            transition: color 0.2s;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-primary);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-contact-pill {
+            padding: 6px 16px !important;
+            background: var(--green-soft) !important;
+            color: var(--green-dark) !important;
+            border-radius: 999px !important;
+            border: 1px solid var(--green-border);
+            font-weight: 700 !important;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-contact-pill:hover {
+            background: var(--green-primary) !important;
+            color: #FFFFFF !important;
+        }
+
+        /* Button System */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 26px;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .primary {
+            background: var(--green-primary);
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(21, 128, 61, 0.25);
+        }
+
+        .primary:hover:not(:disabled) {
+            background: var(--green-dark);
+        }
+
+        .secondary {
+            border: 2px solid var(--green-border);
+            color: var(--green-dark);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(6px);
+        }
+
+        .secondary:hover:not(:disabled) {
+            background: #D8EFE2;
+            border-color: var(--green-primary);
+        }
+
+        /* Section Layouts */
+        section {
+            padding: 85px 0;
+            scroll-margin-top: 80px;
+        }
+
+        .section-label {
+            color: var(--green-primary);
+            background: var(--green-soft);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.15;
+            margin: 8px 0 20px;
+            color: var(--text-primary);
+            font-weight: 800;
+        }
+
+        .section-lead {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            gap: 48px;
+            min-height: 80vh;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 520px;
+        }
+
+        .hero .buttons {
+            margin-top: 32px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-video-wrapper {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            height: 400px;
+            border: 1px solid var(--green-border);
+            box-shadow: var(--shadow-lg);
+            background: #FFFFFF;
+        }
+
+        .hero-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .hero-video-wrapper:hover video {
+            transform: scale(1.02);
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 81, 50, 0.05) 0%, rgba(15, 81, 50, 0.65) 100%);
+            pointer-events: none;
+        }
+
+        .hero-image-caption {
+            position: absolute;
+            bottom: 16px;
+            left: 20px;
+            right: 20px;
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+        }
+
+        /* The Big Idea */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .idea-box {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--green-border);
+            color: var(--text-primary);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(8px);
+        }
+
+        .idea-box h3 {
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--green-dark);
+            font-weight: 800;
+        }
+
+        .idea-box p {
+            color: var(--text-secondary);
+        }
+
+        .split-layout p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .idea-video-card {
+            margin-top: 20px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--green-border);
+            box-shadow: var(--shadow-sm);
+            height: 180px;
+        }
+
+        .idea-video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Showcase Cards */
+        .video-strip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .video-clip-card {
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 24px 22px;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--green-primary);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .video-clip-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--green-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .video-clip-card h4 {
+            color: var(--green-dark);
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .video-clip-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Journey Grid */
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--green-border);
+            backdrop-filter: blur(6px);
+            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-card:hover {
+            border-color: var(--green-primary);
+            transform: translateY(-3px);
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--green-soft);
+            color: var(--green-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .step-card h3 {
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Statement */
+        .statement {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .statement h2 {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            color: var(--text-primary);
+            font-weight: 800;
+        }
+
+        .statement span {
+            color: var(--green-primary);
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 36px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--green-border);
+            padding: 32px;
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(6px);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green-primary);
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            color: var(--green-dark);
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+        }
+
+        /* ======================================================
+           WRITECRAFT INTERACTIVE STUDIO WIDGET
+        ====================================================== */
+        .studio-widget {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-top: 24px;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .studio-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 28px;
+            min-height: 520px;
+        }
+
+        /* Left Column: Input Sandbox */
+        .studio-input-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .prompt-picker {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .prompt-picker label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .prompt-select {
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--surface-elevated);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .drop-area {
+            border: 2px dashed var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 18px 16px;
+            text-align: center;
+            background: var(--surface-light);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .drop-area:hover,
+        .drop-area.dragover {
+            border-color: var(--green-primary);
+            background: #DEF3E8;
+        }
+
+        .drop-area-icon {
+            font-size: 1.8rem;
+            margin-bottom: 4px;
+        }
+
+        .drop-area p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .drop-area strong {
+            color: var(--green-dark);
+        }
+
+        .hidden-file-input {
+            display: none;
+        }
+
+        .input-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .char-counter {
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .studio-textarea {
+            width: 100%;
+            height: 190px;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #FAFCFA;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: none;
+            line-height: 1.5;
+        }
+
+        .studio-textarea:focus {
+            outline: none;
+            border-color: var(--green-primary);
+            background: #FFFFFF;
+        }
+
+        .studio-textarea::placeholder {
+            color: #94A3B8;
+        }
+
+        .status-box {
+            font-size: 0.85rem;
+            padding: 10px 14px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status-box.error {
+            display: block;
+            background: var(--error-bg);
+            color: var(--error);
+            border: 1px solid #FECACA;
+        }
+
+        /* Right Column: Output & Controls */
+        .studio-output-panel {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background: #FFFFFF;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .studio-top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .mode-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mode-selector label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--green-dark);
+        }
+
+        .mode-select {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: #FAFCFA;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .extra-tools {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .tool-btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: #FAFCFA;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .tool-btn:hover:not(:disabled) {
+            background: var(--surface-light);
+            color: var(--green-primary);
+            border-color: var(--green-border);
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+
+        .more-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: #FAFCFA;
+            color: var(--green-dark);
+            font-size: 1.25rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .more-btn:hover:not(:disabled) {
+            background: var(--surface-light);
+            border-color: var(--green-primary);
+        }
+
+        .more-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: 220px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: var(--shadow-md);
+            display: none;
+            flex-direction: column;
+            z-index: 50;
+        }
+
+        .dropdown-menu.show {
+            display: flex;
+        }
+
+        .dropdown-header {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--green-primary);
+            letter-spacing: 1px;
+            padding: 6px 12px 4px;
+            text-transform: uppercase;
+        }
+
+        .dropdown-item {
+            padding: 10px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .dropdown-item:hover {
+            background: var(--surface-light);
+            color: var(--green-dark);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 6px 0;
+        }
+
+        /* Center Content Stage */
+        .studio-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 10px;
+            position: relative;
+            min-height: 310px;
+        }
+
+        .stage-placeholder {
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .stage-placeholder span {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Loading Screen */
+        .loading-overlay {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 14px;
+            width: 80%;
+        }
+
+        .loading-overlay p {
+            font-weight: 600;
+            color: var(--green-primary);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: var(--surface-light);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--green-primary);
+            transition: width 0.05s linear;
+        }
+
+        /* Mode 1: Presentation / Structured Flow */
+        .presentation-card {
+            background: #FFFFFF;
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 26px;
+            width: 100%;
+            max-width: 600px;
+            min-height: 240px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .presentation-card .slide-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--green-primary);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .presentation-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 14px;
+            color: var(--green-dark);
+        }
+
+        .presentation-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Mode 2: Flashcards 3D Interactive Flip */
+        .flashcard-scene {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 480px;
+            height: 240px;
+            cursor: pointer;
+        }
+
+        .flashcard-object {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+
+        .flashcard-object.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--green-border);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .flashcard-front {
+            background: #FFFFFF;
+            color: var(--text-primary);
+        }
+
+        .flashcard-back {
+            background: var(--surface-light);
+            border-color: var(--green-primary);
+            color: var(--green-dark);
+            transform: rotateY(180deg);
+        }
+
+        .card-hint {
+            font-size: 0.75rem;
+            margin-top: 12px;
+            color: var(--green-primary);
+            font-weight: 600;
+        }
+
+        /* Mode 3: Writing Diagnostic Card */
+        .diagnostic-view {
+            width: 100%;
+            max-width: 620px;
+            background: #FFFFFF;
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .diagnostic-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .stat-badge {
+            background: #FAFCFA;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .stat-badge span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .stat-badge strong {
+            font-size: 1.3rem;
+            color: var(--green-primary);
+        }
+
+        .diagnostic-insights {
+            background: var(--surface-light);
+            border-left: 4px solid var(--green-primary);
+            padding: 14px 16px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Bottom Navigation Controls */
+        .studio-bottom-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            gap: 16px;
+        }
+
+        .nav-arrows-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-arrow-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: #FAFCFA;
+            color: var(--text-secondary);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav-arrow-btn:hover:not(:disabled) {
+            background: var(--surface-light);
+            color: var(--green-primary);
+            border-color: var(--green-border);
+        }
+
+        .nav-arrow-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .progress-pill {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            background: var(--green-soft);
+            border: 1px solid var(--green-border);
+            padding: 4px 12px;
+            border-radius: 999px;
+        }
+
+        .page-jump-links {
+            display: flex;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .jump-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: #FAFCFA;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .jump-dot:hover {
+            border-color: var(--green-primary);
+        }
+
+        .jump-dot.active {
+            background: var(--green-primary);
+            color: #FFFFFF;
+            border-color: var(--green-primary);
+        }
+
+        /* ======================================================
+           CURATED ARTICLES & PEDAGOGY SECTION
+        ====================================================== */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .article-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--green-primary);
+            margin-bottom: 8px;
+        }
+
+        .article-card h3 {
+            font-size: 1.25rem;
+            color: var(--green-dark);
+            margin-bottom: 12px;
+            line-height: 1.35;
+        }
+
+        .article-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .article-meta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ======================================================
+           GLOSSARY GRID
+        ====================================================== */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .glossary-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .glossary-card h4 {
+            color: var(--green-dark);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .glossary-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* ======================================================
+           INTERACTIVE FAQ ACCORDION
+        ====================================================== */
+        .faq-accordion {
+            max-width: 860px;
+            margin: 32px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 18px 24px;
+            background: transparent;
+            border: none;
+            text-align: left;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        .faq-question:hover {
+            background: var(--surface-light);
+        }
+
+        .faq-icon {
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .faq-answer {
+            padding: 0 24px 20px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* ======================================================
+           CONTACT US SECTION & FORM
+        ====================================================== */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-top: 1px solid var(--green-border);
+            border-bottom: 1px solid var(--green-border);
+            backdrop-filter: blur(8px);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 40px;
+            align-items: start;
+            margin-top: 30px;
+        }
+
+        .contact-info-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-info-panel h3 {
+            color: var(--green-dark);
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+        }
+
+        .contact-methods {
+            list-style: none;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-method-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .contact-icon {
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .contact-form {
+            background: #FFFFFF;
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-row label {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--green-dark);
+        }
+
+        .form-input, .form-textarea {
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            background: #FAFCFA;
+            transition: border-color 0.15s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--green-primary);
+            background: #FFFFFF;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .contact-success-msg {
+            display: none;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            background: var(--green-soft);
+            color: var(--green-dark);
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: 1px solid var(--green-border);
+        }
+
+        /* Insights & Why It Matters */
+        .future-header {
+            max-width: 780px;
+            margin-bottom: 40px;
+        }
+
+        .matters-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+
+        .matter-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--green-border);
+            border-radius: 18px;
+            padding: 32px;
+            backdrop-filter: blur(6px);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .matter-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--green-primary);
+        }
+
+        .matter-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .matter-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--green-dark);
+        }
+
+        .matter-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .research-banner {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--green-border);
+            border-radius: 16px;
+            padding: 24px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(6px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .banner-badge {
+            background: var(--green-primary);
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .research-banner p {
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Resources & External AI Assistants Shelf */
+        .resources-shelf {
+            margin-top: 50px;
+            padding-top: 36px;
+            border-top: 1px solid var(--green-border);
+            text-align: center;
+        }
+
+        .resources-shelf h3 {
+            font-size: 1.15rem;
+            color: var(--green-dark);
+            margin-bottom: 8px;
+        }
+
+        .resources-shelf p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .ai-links-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .ai-link-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: #FFFFFF;
+            border: 1px solid var(--green-border);
+            border-radius: 999px;
+            color: var(--green-dark);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .ai-link-pill:hover {
+            background: var(--green-soft);
+            border-color: var(--green-primary);
+            color: var(--green-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--green-border);
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--green-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--green-primary);
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .journey-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .studio-grid {
+                grid-template-columns: 1fr;
+            }
+            .video-strip-grid {
+                grid-template-columns: 1fr;
+            }
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            .glossary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero,
+            .split-layout,
+            .benefits-grid,
+            .journey-grid,
+            .matters-grid,
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .hero-video-wrapper {
+                height: 280px;
+            }
+
+            .hero .buttons {
+                flex-direction: column;
+            }
+
+            .research-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 20px;
+            }
+
+            .studio-bottom-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .page-jump-links {
+                justify-content: center;
+            }
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T33T81PECL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T33T81PECL');
+</script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Navigation Header with pic.jpg background and Contact Link -->
+<header>
+    <div class="container">
+        <nav aria-label="Main Navigation">
+            <a href="#" class="logo">
+                <span class="logo-icon">🌿</span>
+                WriteCraft
+            </a>
+            <ul class="nav-links">
+                <li><a href="#story">The Mission</a></li>
+                <li><a href="#idea">The Framework</a></li>
+                <li><a href="#journey">The Workflow</a></li>
+                <li><a href="#studio">Interactive Studio</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#glossary">Glossary</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#insights">Why It Matters</a></li>
+                <li><a href="#contact" class="nav-contact-pill">Contact Us ✉️</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main id="main-content">
+
+    <!-- Hero Section -->
+    <section class="container hero" id="story">
+        <div>
+            <span class="section-label">WRITING • CREATIVITY • SYNTHESIS</span>
+            <h1 class="section-title">Every great idea begins with understanding.</h1>
+            <p>
+                WriteCraft empowers writers, researchers, and creators to transform raw thoughts, technical arguments, and complex drafts into clear, structured, and confident prose.
+            </p>
+            <div class="buttons">
+                <a href="#journey" class="btn primary">Explore the Workflow</a>
+                <a href="#studio" class="btn secondary">Open Interactive Studio</a>
+            </div>
+        </div>
+
+        <!-- Hero Video Clip: Hand writing an essay with a pen on paper -->
+        <div class="hero-video-wrapper">
+            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-hand-writing-in-a-notebook-with-a-pen-43200-large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-image-overlay"></div>
+            <div class="hero-image-caption">Deliberate unassisted composition and thought drafting</div>
+        </div>
+    </section>
+
+    <!-- The Big Idea -->
+    <section id="idea">
+        <div class="container">
+            <span class="section-label">THE FRAMEWORK</span>
+            <h2 class="section-title">Writing is more than the finished draft.</h2>
+            <div class="split-layout">
+                <div class="idea-box">
+                    <h3>What happens before mastery?</h3>
+                    <p>
+                        Growth happens through the active friction of composition: testing hypotheses, adjusting narrative pacing, identifying syntax gaps, and discovering your distinctive voice.
+                    </p>
+                    <div class="idea-video-card">
+                        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80">
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-person-typing-on-a-laptop-keyboard-43187-large.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        We often praise only the polished final copy. But true communication competence develops through the iterative process of connecting unorganized ideas into clear, logical chains.
+                    </p>
+                    <p>
+                        Visual and diagnostic tools accelerate this loop by making argument depth, sentence complexity, and cognitive reliance transparent on a single responsive canvas.
+                    </p>
+
+                    <!-- Dual Clean Feature Cards -->
+                    <div class="video-strip-grid">
+                        <div class="video-clip-card">
+                            <h4><span>💻</span> Digital Drafting</h4>
+                            <p>Iterate rapidly on thesis outlines and sentence rhythm within modern web workspaces while retaining ownership of your primary claims.</p>
+                        </div>
+
+                        <div class="video-clip-card">
+                            <h4><span>✍️</span> Analog Reflection</h4>
+                            <p>Practice pen-to-paper freewriting sessions to overcome mental friction, establish voice clarity, and prevent automated reliance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Journey -->
+    <section id="journey">
+        <div class="container">
+            <span class="section-label">THE WORKFLOW</span>
+            <h2 class="section-title">How authentic clarity takes shape</h2>
+            <div class="journey-grid">
+                <article class="step-card">
+                    <div class="step-number" aria-hidden="true">01</div>
+                    <h3>Discover</h3>
+                    <p>Facing the blank page and framing the primary thesis statement.</p>
+                </article>
+                <article class="step-card">
+                    <div class="step-number" aria-hidden="true">02</div>
+                    <h3>Explore</h3>
+                    <p>Gathering evidence, outlining arguments, and identifying key themes.</p>
+                </article>
+                <article class="step-card">
+                    <div class="step-number" aria-hidden="true">03</div>
+                    <h3>Draft</h3>
+                    <p>Writing unassisted to establish genuine personal cadence and flow.</p>
+                </article>
+                <article class="step-card">
+                    <div class="step-number" aria-hidden="true">04</div>
+                    <h3>Refine</h3>
+                    <p>Evaluating automated feedback, tightening grammar, and enriching style.</p>
+                </article>
+                <article class="step-card">
+                    <div class="step-number" aria-hidden="true">05</div>
+                    <h3>Master</h3>
+                    <p>Communicating with precision, nuance, and lasting independence.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statement Banner -->
+    <section class="statement container">
+        <h2>Thinking does not move in a straight line. <span>It evolves.</span></h2>
+    </section>
+
+    <!-- Benefits -->
+    <section id="benefits">
+        <div class="container">
+            <span class="section-label">THE EDGE</span>
+            <h2 class="section-title">Why intentional composition works</h2>
+            <div class="benefits-grid">
+                <div class="card">
+                    <h3>Deepen Cognitive Retention</h3>
+                    <p>Structuring ideas independently solidifies argument flow directly into long-term memory.</p>
+                </div>
+                <div class="card">
+                    <h3>Prevent Skill Atrophy</h3>
+                    <p>Using diagnostic tools as learning tutors rather than full auto-generators keeps critical thinking sharp.</p>
+                </div>
+                <div class="card">
+                    <h3>Protect Your Authentic Voice</h3>
+                    <p>Deliberate editing ensures that personal tone and distinct stylistic choices remain front and center.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================
+         INTERACTIVE WRITECRAFT STUDIO WIDGET
+    ====================================================== -->
+    <section id="studio">
+        <div class="container">
+            <span class="section-label">INTERACTIVE STUDIO</span>
+            <h2 class="section-title">Transform Ideas into Structured Insights</h2>
+            <p class="section-lead">Drop your text below or load a preset topic to generate concept cards, active recall flashcards, or a live diagnostic assessment.</p>
+
+            <div class="studio-widget">
+                <div class="studio-grid">
+
+                    <!-- Left Column: Input Sandbox -->
+                    <div class="studio-input-panel">
+                        <div class="prompt-picker">
+                            <label for="promptPicker">Select a Preset or Custom Topic:</label>
+                            <select id="promptPicker" class="prompt-select" onchange="handlePresetPick()">
+                                <option value="tech">Technology: Does digital convenience reduce critical thinking?</option>
+                                <option value="education">Education: Can self-directed portfolios replace exams?</option>
+                                <option value="creativity">Creativity: Can algorithms generate authentic art?</option>
+                                <option value="custom">Custom (Write or paste your own)</option>
+                            </select>
+                        </div>
+
+                        <div class="drop-area" id="dropArea" tabindex="0" role="button" aria-label="Upload text file">
+                            <div class="drop-area-icon">📄</div>
+                            <strong>Drag & Drop Notes</strong>
+                            <p>or click to browse (.txt files accepted)</p>
+                            <input type="file" id="fileInput" class="hidden-file-input" accept=".txt">
+                        </div>
+
+                        <div class="input-label-row">
+                            <label for="lessonText">Draft Your Thoughts:</label>
+                            <span class="char-counter" id="charCounter">0 / 3,000</span>
+                        </div>
+                        <textarea id="lessonText" class="studio-textarea" placeholder="Paste your draft, notes, or ideas here (50 - 3,000 characters)..."></textarea>
+
+                        <div id="statusMessage" class="status-box" role="alert"></div>
+                        <button type="button" class="btn primary" id="generateBtn" onclick="handleGenerateAction()" title="Generate Visual Output">
+                            <span>✏</span> Generate Visual Output
+                        </button>
+                    </div>
+
+                    <!-- Right Column: Results & Interactive Display -->
+                    <div class="studio-output-panel">
+
+                        <!-- Top Controls: Mode & 3-Dot Export -->
+                        <div class="studio-top-controls">
+                            <div class="mode-selector">
+                                <label for="learningMode">MODE:</label>
+                                <select id="learningMode" class="mode-select" onchange="handleModeChange()">
+                                    <option value="presentation">Concept Deck</option>
+                                    <option value="flashcards">Interactive Flashcards</option>
+                                    <option value="diagnostic">Voice & Offloading Diagnostic</option>
+                                </select>
+                            </div>
+
+                            <div class="extra-tools">
+                                <button type="button" class="tool-btn" onclick="clearStudio()">Clear</button>
+
+                                <div class="dropdown-container">
+                                    <button type="button" class="more-btn" id="exportMenuBtn" onclick="toggleExportMenu(event)" aria-haspopup="true" aria-expanded="false" aria-label="Export settings and options" disabled>
+                                        &#8942;
+                                    </button>
+
+                                    <div class="dropdown-menu" id="exportMenu" role="menu">
+                                        <div class="dropdown-header">Export Format</div>
+                                        <button type="button" class="dropdown-item" role="menuitem" onclick="exportAs('txt')">
+                                            <span>Text Document</span>
+                                            <span style="color:var(--green-primary); font-size:0.75rem;">.TXT</span>
+                                        </button>
+                                        <button type="button" class="dropdown-item" role="menuitem" onclick="exportAs('md')">
+                                            <span>Markdown</span>
+                                            <span style="color:var(--green-primary); font-size:0.75rem;">.MD</span>
+                                        </button>
+                                        <button type="button" class="dropdown-item" role="menuitem" onclick="exportAs('html')">
+                                            <span>Standalone Page</span>
+                                            <span style="color:var(--green-primary); font-size:0.75rem;">.HTML</span>
+                                        </button>
+                                        <button type="button" class="dropdown-item" role="menuitem" onclick="exportAs('json')">
+                                            <span>Structured Data</span>
+                                            <span style="color:var(--green-primary); font-size:0.75rem;">.JSON</span>
+                                        </button>
+                                        <div class="dropdown-divider"></div>
+                                        <button type="button" class="dropdown-item" role="menuitem" onclick="printStudioContent()">
+                                            <span>Print / PDF</span>
+                                            <span style="font-size:0.85rem;">🖨️</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Center Display Canvas -->
+                        <div class="studio-stage" id="studioStage">
+
+                            <!-- Initial Placeholder -->
+                            <div class="stage-placeholder" id="placeholderView">
+                                <span>🌿</span>
+                                <p>Generated visual modules and diagnostic evaluations will render here.</p>
+                            </div>
+
+                            <!-- Progress Animation Overlay -->
+                            <div class="loading-overlay" id="loadingView">
+                                <p>Synthesizing insights and checking lexical distribution...</p>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" id="progressBar"></div>
+                                </div>
+                            </div>
+
+                            <!-- Active Output Container -->
+                            <div id="activeRenderContainer" style="display:none; width:100%; display:flex; justify-content:center;"></div>
+                        </div>
+
+                        <!-- Bottom Navigation Controls -->
+                        <div class="studio-bottom-controls" id="bottomNavControls" style="display:none;">
+                            <div class="nav-arrows-group">
+                                <button type="button" class="nav-arrow-btn" id="prevBtn" onclick="navigateStep(-1)" aria-label="Previous Item">← Previous</button>
+                                <button type="button" class="nav-arrow-btn" id="nextBtn" onclick="navigateStep(1)" aria-label="Next Item">Next →</button>
+                            </div>
+
+                            <span class="progress-pill" id="itemCounter">1 / 3</span>
+                            <ul class="page-jump-links" id="pageDots" aria-label="Skip to card"></ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================
+         CURATED ARTICLES & ESSAY PERSPECTIVES
+    ====================================================== -->
+    <section id="articles">
+        <div class="container">
+            <span class="section-label">WRITECRAFT ESSAYS</span>
+            <h2 class="section-title">Perspectives on Thought & Composition</h2>
+            <p class="section-lead">Short examinations of how authors maintain genuine style, intellectual ownership, and cognitive agility alongside machine intelligence.</p>
+
+            <div class="articles-grid">
+                <!-- Article 1 -->
+                <article class="article-card">
+                    <div>
+                        <span class="article-tag">Cognitive Architecture</span>
+                        <h3>The Scaffolding Paradox: Why Easy Drafts Stunt Writing Muscle</h3>
+                        <p>
+                            Generating an instantaneous outline via LLMs offers relief against immediate deadlines, but it deprives the brain of essential inductive structuring. True clarity is born not from receiving a structure, but from wrestling raw thoughts into one.
+                        </p>
+                    </div>
+                    <div class="article-meta">
+                        <span>Read Time: 3 mins</span>
+                        <span>Topic: Cognitive Offloading</span>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <div>
+                        <span class="article-tag">Voice & Style</span>
+                        <h3>The Syntax Fingerprint: Why Algorithmic Polish Normalizes You</h3>
+                        <p>
+                            Automated grammar editors prioritize normative predictability. While technically clean, over-polished prose eliminates the distinctive cadences, pauses, and passionate vulnerability that distinguish memorable personal essays from generic copy.
+                        </p>
+                    </div>
+                    <div class="article-meta">
+                        <span>Read Time: 4 mins</span>
+                        <span>Topic: Linguistic Autonomy</span>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <div>
+                        <span class="article-tag">Methodology</span>
+                        <h3>The 70/30 Hybrid Rule: A Sustainable Workflow for Modern Authors</h3>
+                        <p>
+                            Top digital communicators don't banish technology—they boundary it. Dedicate 70% of drafting effort to unassisted manual reflection and thesis architecture, reserving the final 30% for AI diagnostics, tone-checking, and counterargument stress-tests.
+                        </p>
+                    </div>
+                    <div class="article-meta">
+                        <span>Read Time: 3 mins</span>
+                        <span>Topic: Writing Playbook</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================
+         GLOSSARY: THE METRICS OF COMPOSITION
+    ====================================================== -->
+    <section id="glossary" style="background: rgba(255, 255, 255, 0.7); border-top: 1px solid var(--green-border); border-bottom: 1px solid var(--green-border);">
+        <div class="container">
+            <span class="section-label">KEY TERMS</span>
+            <h2 class="section-title">Writing Diagnostics Glossary</h2>
+            <p class="section-lead">Understanding the metrics that define whether an essay retains personal authenticity or slips into automated dependency.</p>
+
+            <div class="glossary-grid">
+                <div class="glossary-card">
+                    <h4><span>📊</span> Lexical Variety</h4>
+                    <p>The proportion of unique words to total word count (Type-Token Ratio). High diversity signals rich personal vocabulary, while low scores indicate repetitive phrasing.</p>
+                </div>
+                <div class="glossary-card">
+                    <h4><span>🧠</span> Cognitive Offloading</h4>
+                    <p>The practice of relying on automated tools to carry mental labor (outlining, ideation, syntax) rather than exercising internal critical reasoning.</p>
+                </div>
+                <div class="glossary-card">
+                    <h4><span>⚖</span> The Confidence Gap</h4>
+                    <p>The psychological disparity where a writer scores well with AI assistance but experiences acute anxiety when tasked with composing an essay unassisted.</p>
+                </div>
+                <div class="glossary-card">
+                    <h4><span>🔍</span> Syntactic Density</h4>
+                    <p>The ratio of clauses and complex sentence constructions. Varied syntactic density creates organic rhythm; uniform density sounds mechanical.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================
+         FREQUENTLY ASKED QUESTIONS (ACCORDION)
+    ====================================================== -->
+    <section id="faq">
+        <div class="container">
+            <div style="text-align: center; max-width: 680px; margin: 0 auto 30px;">
+                <span class="section-label">COMMUNITY FAQ</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-lead">Practical advice for students, creators, and professionals balancing writing rigor with generative AI.</p>
+            </div>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                        <span>Should I ever use AI to generate my initial essay outline?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We recommend drafting a 3-point bullet outline manually first. Once you know your personal conviction, consult AI to identify counterarguments or blind spots you might have overlooked. If you generate the outline first, you unconsciously adopt the model's perspective rather than discovering your own.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                        <span>How can I tell if my writing is becoming too dependent on AI?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>A simple test: Sit down with a blank sheet of paper and a pen, set a 10-minute timer, and write on your topic. If you experience paralysis or can't initiate sentences without an autocomplete prompt, you are likely experiencing cognitive offloading. Regular timed freewrites quickly rebuild this mental stamina.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is the best way to polish an essay without losing my voice?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Never accept full paragraph replacements. Ask your AI assistant for specific grammar flags, passive voice callouts, or alternative transition words. Choose and type the corrections manually so the rhythm remains natural to your speaking cadence.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does WriteCraft's diagnostic calculate lexical distribution?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>WriteCraft analyzes the ratio of distinct lemmas against the total word count, evaluates average sentence length, and flags syntactic repetition. It highlights whether your piece reflects organic human variation or the balanced neutrality characteristic of automated text.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================
+         CONTACT US SECTION
+    ====================================================== -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <span class="section-label">GET IN TOUCH</span>
+            <h2 class="section-title">Contact the WriteCraft Team</h2>
+            <p class="section-lead">Have questions about essay diagnostics, feedback algorithms, or suggestions to improve the learning studio? Send us a note below.</p>
+
+            <div class="contact-grid">
+                <!-- Left Details Box -->
+                <div class="contact-info-panel">
+                    <h3>We'd love to hear from you</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        Whether you are an educator evaluating hybrid AI policies, a student developing your writing portfolio, or an independent writer, our team is open to ideas and feedback.
+                    </p>
+
+                    <ul class="contact-methods">
+                        <li class="contact-method-item">
+                            <span class="contact-icon">📍</span>
+                            <div>
+                                <strong>Location:</strong>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Manila, Metro Manila, Philippines</p>
+                            </div>
+                        </li>
+                        <li class="contact-method-item">
+                            <span class="contact-icon">📧</span>
+                            <div>
+                                <strong>Email:</strong>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">writecraft.learning@gmail.com</p>
+                            </div>
+                        </li>
+                        <li class="contact-method-item">
+                            <span class="contact-icon">⚡</span>
+                            <div>
+                                <strong>Response Time:</strong>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Typically within 24–48 hours</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right Form Box -->
+                <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div class="form-row">
+                        <label for="contactName">Your Name</label>
+                        <input type="text" id="contactName" class="form-input" placeholder="e.g. Inaki Castasus" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="contactEmail">Email Address</label>
+                        <input type="email" id="contactEmail" class="form-input" placeholder="name@example.com" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="contactMessage">Your Message or Feedback</label>
+                        <textarea id="contactMessage" class="form-textarea" placeholder="Share your suggestions, classroom use case, or questions about the writing studio..." required></textarea>
+                    </div>
+
+                    <div id="contactSuccess" class="contact-success-msg">
+                        ✓ Thank you! Your message has been received. We'll be in touch soon.
+                    </div>
+
+                    <button type="submit" class="btn primary" style="align-self: flex-start;">
+                        <span>✉️</span> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why It Matters Section -->
+    <section id="insights">
+        <div class="container">
+            <div class="future-header">
+                <span class="section-label">WHY IT MATTERS</span>
+                <h2 class="section-title">The "Show, Don't Tell" Shift in Modern Writing</h2>
+                <p class="section-lead">
+                    Whether constructing essays or breaking down research, linear text is always stronger when supported by clear visual models. Transforming abstract paragraphs into structural milestones turns confusion into lasting insight.
+                </p>
+            </div>
+
+            <div class="matters-grid">
+                <article class="matter-card">
+                    <div class="matter-icon" aria-hidden="true">🧠</div>
+                    <h3>Bypassing Cognitive Friction</h3>
+                    <p>
+                        Converting unstructured brainstorming into sequential cards allows writers to evaluate logic and flow without getting bogged down in line-level punctuation.
+                    </p>
+                </article>
+
+                <article class="matter-card">
+                    <div class="matter-icon" aria-hidden="true">🎯</div>
+                    <h3>Confidence Over Automation</h3>
+                    <p>
+                        Using tools to visualize ideas rather than generate entire drafts preserves your original perspective and prevents over-reliance on generic AI prose.
+                    </p>
+                </article>
+
+                <article class="matter-card">
+                    <div class="matter-icon" aria-hidden="true">🔍</div>
+                    <h3>Spotting Logic Gaps Instantly</h3>
+                    <p>
+                        When arguments are displayed as standalone milestones, missing transitions, weak evidence, and repetitive patterns become instantly recognizable.
+                    </p>
+                </article>
+
+                <article class="matter-card">
+                    <div class="matter-icon" aria-hidden="true">⚖️</div>
+                    <h3>The Power of Hybrid Thinking</h3>
+                    <p>
+                        The most durable communicators pair structural scaffolding with expressive prose—achieving architectural clarity without losing emotional depth.
+                    </p>
+                </article>
+            </div>
+
+            <div class="research-banner">
+                <div class="banner-badge">CORE PRINCIPLE</div>
+                <p>
+                    <strong>Keep the Author in Control:</strong> Leverage smart diagnostics to organize, challenge, and refine your arguments—while keeping your authentic judgment in the driver's seat.
+                </p>
+            </div>
+
+            <!-- External AI Research & Writing Assistants Shelf -->
+            <div class="resources-shelf">
+                <h3>Explore AI Writing & Research Tools</h3>
+                <p>Learn how top frontier LLMs compare for ideation, outline expansion, and proofreading.</p>
+                <div class="ai-links-grid">
+                    <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="ai-link-pill" onclick="trackStudioEvent('external_ai_link', 'Resources Shelf', 'Google Gemini')">
+                        <span>✨</span> Google Gemini
+                    </a>
+                    <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="ai-link-pill" onclick="trackStudioEvent('external_ai_link', 'Resources Shelf', 'ChatGPT')">
+                        <span>🤖</span> OpenAI ChatGPT
+                    </a>
+                    <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="ai-link-pill" onclick="trackStudioEvent('external_ai_link', 'Resources Shelf', 'Claude')">
+                        <span>📜</span> Anthropic Claude
+                    </a>
+                    <a href="https://www.perplexity.ai" target="_blank" rel="noopener noreferrer" class="ai-link-pill" onclick="trackStudioEvent('external_ai_link', 'Resources Shelf', 'Perplexity')">
+                        <span>🔍</span> Perplexity AI
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer with Contact Link -->
+<footer>
+    <div class="container">
+        <ul class="footer-links">
+            <li><a href="#story">Mission</a></li>
+            <li><a href="#studio">Studio</a></li>
+            <li><a href="#articles">Articles</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+        <p>WriteCraft • An Interactive Platform for Writers, Thinkers, and Researchers</p>
+        <p class="footer-note">Designed to cultivate independent thought alongside modern generative tools.</p>
+    </div>
+</footer>
+
+<!-- Interactive Studio Engine -->
+<script>
+    /* ======================================================
+       GOOGLE ANALYTICS EVENT TRACKING HELPER
+    ====================================================== */
+    function trackStudioEvent(action, category, label = '', value = null) {
+        if (typeof gtag === 'function') {
+            const payload = {
+                event_category: category,
+                event_label: label
+            };
+            if (value !== null && !isNaN(value)) {
+                payload.value = value;
+            }
+            gtag('event', action, payload);
+        }
+    }
+
+    const presets = {
+        tech: "Technological convenience enhances daily productivity, but excessive reliance on automated tools risks eroding fundamental critical thinking. When writers delegate outlining and sentence synthesis entirely to algorithms, they experience cognitive offloading. Sustainable mastery requires balancing digital speed with deliberate, unassisted mental exercise.",
+        education: "Standardized testing encourages superficial memorization rather than creative synthesis. Comprehensive portfolios and applied project evaluations provide a far richer representation of human capability, allowing learners to demonstrate active problem-solving and authentic insight.",
+        creativity: "While computer algorithms can mimic meter, sentence variety, and formal structures, authentic art requires lived emotional struggle, vulnerability, and genuine human experience. Without personal perspective, writing remains fluent yet devoid of distinctive voice.",
+        custom: ""
+    };
+
+    const lessonTextInput = document.getElementById("lessonText");
+    const charCounter = document.getElementById("charCounter");
+    const statusMessage = document.getElementById("statusMessage");
+    const dropArea = document.getElementById("dropArea");
+    const fileInput = document.getElementById("fileInput");
+    const learningModeSelect = document.getElementById("learningMode");
+    const placeholderView = document.getElementById("placeholderView");
+    const loadingView = document.getElementById("loadingView");
+    const progressBar = document.getElementById("progressBar");
+    const activeRenderContainer = document.getElementById("activeRenderContainer");
+    const bottomNavControls = document.getElementById("bottomNavControls");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const itemCounter = document.getElementById("itemCounter");
+    const pageDots = document.getElementById("pageDots");
+    const exportMenuBtn = document.getElementById("exportMenuBtn");
+    const exportMenu = document.getElementById("exportMenu");
+
+    let activeDataset = [];
+    let currentIndex = 0;
+
+    window.addEventListener("DOMContentLoaded", () => {
+        handlePresetPick(false);
+    });
+
+    function handlePresetPick(sendAnalytics = true) {
+        const picker = document.getElementById("promptPicker");
+        const val = presets[picker.value];
+        if (val) {
+            lessonTextInput.value = val;
+            updateCharCount();
+            clearError();
+        } else if (picker.value === "custom") {
+            lessonTextInput.value = "";
+            updateCharCount();
+        }
+
+        if (sendAnalytics) {
+            trackStudioEvent('select_prompt_preset', 'Studio Input', picker.value);
+        }
+    }
+
+    lessonTextInput.addEventListener("input", updateCharCount);
+
+    function updateCharCount() {
+        const len = lessonTextInput.value.length;
+        charCounter.textContent = `${len.toLocaleString()} / 3,000`;
+        charCounter.style.color = len > 3000 ? "var(--error)" : "var(--text-muted)";
+    }
+
+    // Drag & Drop
+    dropArea.addEventListener("click", () => {
+        trackStudioEvent('click_file_upload_area', 'Studio Input', 'File Upload Trigger');
+        fileInput.click();
+    });
+    dropArea.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            trackStudioEvent('keyboard_file_upload_area', 'Studio Input', 'File Upload Trigger');
+            fileInput.click();
+        }
+    });
+
+    ["dragenter", "dragover"].forEach(evt => {
+        dropArea.addEventListener(evt, (e) => {
+            e.preventDefault();
+            dropArea.classList.add("dragover");
+        });
+    });
+
+    ["dragleave", "drop"].forEach(evt => {
+        dropArea.addEventListener(evt, (e) => {
+            e.preventDefault();
+            dropArea.classList.remove("dragover");
+        });
+    });
+
+    dropArea.addEventListener("drop", (e) => {
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            trackStudioEvent('file_drop', 'Studio Input', files[0].name);
+            handleFileSelection(files[0]);
+        }
+    });
+
+    fileInput.addEventListener("change", (e) => {
+        if (e.target.files.length > 0) {
+            trackStudioEvent('file_browse_selected', 'Studio Input', e.target.files[0].name);
+            handleFileSelection(e.target.files[0]);
+        }
+    });
+
+    function handleFileSelection(file) {
+        if (!file.name.endsWith(".txt")) {
+            showError("Please upload a valid .txt text document.");
+            trackStudioEvent('file_upload_error', 'Studio Input', 'Invalid file type: ' + file.name);
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            lessonTextInput.value = e.target.result;
+            updateCharCount();
+            clearError();
+            trackStudioEvent('file_upload_success', 'Studio Input', file.name, file.size);
+        };
+        reader.readAsText(file);
+    }
+
+    function showError(msg) {
+        statusMessage.textContent = msg;
+        statusMessage.className = "status-box error";
+    }
+
+    function clearError() {
+        statusMessage.textContent = "";
+        statusMessage.className = "status-box";
+    }
+
+    // Generation Engine
+    function handleGenerateAction() {
+        const text = lessonTextInput.value.trim();
+
+        if (text.length === 0) {
+            showError("Please enter or paste some text first.");
+            trackStudioEvent('validation_error', 'Studio Generation', 'Empty input text');
+            return;
+        }
+        if (text.length < 50) {
+            showError("Text is too short. Please provide at least 50 characters.");
+            trackStudioEvent('validation_error', 'Studio Generation', 'Input under 50 characters');
+            return;
+        }
+        if (text.length > 3000) {
+            showError("Text exceeds the 3,000 character limit.");
+            trackStudioEvent('validation_error', 'Studio Generation', 'Input over 3000 characters');
+            return;
+        }
+
+        clearError();
+
+        trackStudioEvent('generate_visual_output', 'Studio Generation', learningModeSelect.value, text.length);
+
+        placeholderView.style.display = "none";
+        activeRenderContainer.style.display = "none";
+        bottomNavControls.style.display = "none";
+        loadingView.style.display = "flex";
+        progressBar.style.width = "0%";
+
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 12;
+            progressBar.style.width = progress + "%";
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    loadingView.style.display = "none";
+                    synthesizeContent(text);
+                }, 180);
+            }
+        }, 35);
+    }
+
+    function synthesizeContent(rawText) {
+        const sentences = rawText
+            .split(/(?<=[.?!])\s+/)
+            .map(s => s.trim())
+            .filter(s => s.length > 10);
+
+        const words = rawText.trim().split(/\s+/);
+        const mode = learningModeSelect.value;
+        activeDataset = [];
+
+        if (mode === "presentation") {
+            const chunkSize = Math.max(1, Math.ceil(sentences.length / 4));
+            for (let i = 0; i < sentences.length; i += chunkSize) {
+                const chunk = sentences.slice(i, i + chunkSize);
+                activeDataset.push({
+                    title: `Concept Phase ${Math.floor(i / chunkSize) + 1}`,
+                    body: chunk.join(" ")
+                });
+            }
+        } else if (mode === "flashcards") {
+            sentences.slice(0, 5).forEach((sentence, idx) => {
+                const wordsList = sentence.split(" ");
+                const prompt = wordsList.slice(0, 4).join(" ") + "...";
+                activeDataset.push({
+                    front: `Argument Milestone #${idx + 1}`,
+                    prompt: prompt,
+                    back: sentence
+                });
+            });
+        } else if (mode === "diagnostic") {
+            const uniqueWords = new Set(words.map(w => w.toLowerCase().replace(/[^a-z]/g, "")));
+            const lexicalDensity = Math.round((uniqueWords.size / Math.max(1, words.length)) * 100);
+            const avgSentenceLen = Math.round(words.length / Math.max(1, sentences.length));
+
+            let offloadScore = "Low (Authentic Voice)";
+            let observation = "Your writing demonstrates strong independent syntax with healthy lexical variation and low reliance on generic template phrasing.";
+
+            if (rawText.length > 400 && lexicalDensity < 48) {
+                offloadScore = "Moderate Offloading Risk";
+                observation = "Repetitive sentence structures detected. Consider varying transition phrasing and integrating sharper, active verbs.";
+            }
+
+            activeDataset.push({
+                type: "diagnostic",
+                wordCount: words.length,
+                sentenceCount: sentences.length,
+                diversity: `${lexicalDensity}%`,
+                offload: offloadScore,
+                analysis: observation,
+                avgLength: `${avgSentenceLen} words/sentence`
+            });
+        }
+
+        currentIndex = 0;
+        renderCurrentItem();
+        renderPageJumpDots();
+        bottomNavControls.style.display = activeDataset.length > 1 ? "flex" : "none";
+        exportMenuBtn.disabled = false;
+    }
+
+    function renderCurrentItem() {
+        activeRenderContainer.style.display = "flex";
+        activeRenderContainer.innerHTML = "";
+
+        const mode = learningModeSelect.value;
+        const item = activeDataset[currentIndex];
+
+        if (mode === "presentation") {
+            const slide = document.createElement("div");
+            slide.className = "presentation-card";
+            slide.innerHTML = `
+                <div class="slide-tag">CARD ${currentIndex + 1} OF ${activeDataset.length}</div>
+                <h3>${item.title}</h3>
+                <p>${item.body}</p>
+            `;
+            activeRenderContainer.appendChild(slide);
+        } else if (mode === "flashcards") {
+            const scene = document.createElement("div");
+            scene.className = "flashcard-scene";
+            scene.innerHTML = `
+                <div class="flashcard-object" onclick="toggleCardFlip(this, ${currentIndex + 1})">
+                    <div class="flashcard-face flashcard-front">
+                        <span class="slide-tag" style="color:var(--green-primary); font-size:0.75rem; font-weight:700;">${item.front}</span>
+                        <h3 style="margin-top:10px; color:var(--text-primary); font-size:1.15rem;">${item.prompt}</h3>
+                        <p class="card-hint">Click or tap to reveal full argument ↻</p>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <span class="slide-tag" style="color:var(--green-primary); font-size:0.75rem; font-weight:700;">FULL PERSPECTIVE</span>
+                        <p style="margin-top:10px; color:var(--green-dark); font-size:0.95rem;">${item.back}</p>
+                        <p class="card-hint">Click to flip back</p>
+                    </div>
+                </div>
+            `;
+            activeRenderContainer.appendChild(scene);
+        } else if (mode === "diagnostic") {
+            const diag = document.createElement("div");
+            diag.className = "diagnostic-view";
+            diag.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                    <h3 style="color:var(--green-dark); margin:0;">Voice & Synthesis Assessment</h3>
+                    <span class="banner-badge">${item.offload}</span>
+                </div>
+                <div class="diagnostic-stats">
+                    <div class="stat-badge"><span>Total Words</span><strong>${item.wordCount}</strong></div>
+                    <div class="stat-badge"><span>Lexical Variety</span><strong>${item.diversity}</strong></div>
+                    <div class="stat-badge"><span>Sentence Flow</span><strong style="font-size:1.05rem;">${item.avgLength}</strong></div>
+                </div>
+                <div class="diagnostic-insights">
+                    <p style="color:var(--text-primary); margin:0;"><strong>Diagnostic Note:</strong> ${item.analysis}</p>
+                </div>
+            `;
+            activeRenderContainer.appendChild(diag);
+        }
+
+        itemCounter.textContent = `${currentIndex + 1} / ${activeDataset.length}`;
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === activeDataset.length - 1;
+
+        const dots = document.querySelectorAll(".jump-dot");
+        dots.forEach((dot, i) => {
+            dot.classList.toggle("active", i === currentIndex);
+        });
+    }
+
+    function toggleCardFlip(element, cardNum) {
+        element.classList.toggle('is-flipped');
+        const isFlipped = element.classList.contains('is-flipped');
+        trackStudioEvent('flip_flashcard', 'Studio Interaction', `Card ${cardNum}: ${isFlipped ? 'Answer' : 'Prompt'}`);
+    }
+
+    function renderPageJumpDots() {
+        pageDots.innerHTML = "";
+        if (activeDataset.length <= 1) return;
+
+        activeDataset.forEach((_, idx) => {
+            const li = document.createElement("li");
+            li.className = `jump-dot ${idx === currentIndex ? "active" : ""}`;
+            li.textContent = idx + 1;
+            li.setAttribute("aria-label", `Jump to item ${idx + 1}`);
+            li.addEventListener("click", () => {
+                trackStudioEvent('click_pagination_dot', 'Studio Navigation', `Jump to card ${idx + 1}`);
+                currentIndex = idx;
+                renderCurrentItem();
+            });
+            pageDots.appendChild(li);
+        });
+    }
+
+    function navigateStep(direction) {
+        const newIdx = currentIndex + direction;
+        if (newIdx >= 0 && newIdx < activeDataset.length) {
+            const dirLabel = direction > 0 ? 'Next' : 'Previous';
+            trackStudioEvent('click_nav_arrow', 'Studio Navigation', `${dirLabel} to Card ${newIdx + 1}`);
+            currentIndex = newIdx;
+            renderCurrentItem();
+        }
+    }
+
+    function handleModeChange() {
+        trackStudioEvent('change_learning_mode', 'Studio Navigation', learningModeSelect.value);
+        if (lessonTextInput.value.trim().length >= 50) {
+            handleGenerateAction();
+        }
+    }
+
+    function clearStudio() {
+        trackStudioEvent('clear_studio', 'Studio Actions', 'Reset Inputs and Stage');
+        lessonTextInput.value = "";
+        updateCharCount();
+        activeDataset = [];
+        currentIndex = 0;
+        activeRenderContainer.innerHTML = "";
+        activeRenderContainer.style.display = "none";
+        bottomNavControls.style.display = "none";
+        placeholderView.style.display = "block";
+        exportMenuBtn.disabled = true;
+        exportMenu.classList.remove("show");
+        clearError();
+    }
+
+    // Export Dropdown
+    function toggleExportMenu(e) {
+        e.stopPropagation();
+        const isShowing = exportMenu.classList.toggle("show");
+        exportMenuBtn.setAttribute("aria-expanded", isShowing);
+        trackStudioEvent('toggle_export_menu', 'Studio Export', isShowing ? 'Open Menu' : 'Close Menu');
+    }
+
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".dropdown-container")) {
+            exportMenu.classList.remove("show");
+            exportMenuBtn.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && exportMenu.classList.contains("show")) {
+            exportMenu.classList.remove("show");
+            exportMenuBtn.setAttribute("aria-expanded", "false");
+            exportMenuBtn.focus();
+        }
+    });
+
+    function exportAs(format) {
+        if (activeDataset.length === 0) return;
+        exportMenu.classList.remove("show");
+
+        const mode = learningModeSelect.value;
+        let content = "";
+        let mimeType = "text/plain";
+        let filename = `writecraft-${mode}.${format}`;
+
+        trackStudioEvent('export_file', 'Studio Export', `${mode} as .${format}`);
+
+        if (format === "txt") {
+            content = `WRITECRAFT STUDIO EXPORT\nMode: ${mode.toUpperCase()}\n\n`;
+            activeDataset.forEach((item, i) => {
+                content += `--- ITEM ${i + 1} ---\n`;
+                if (item.title) content += `Title: ${item.title}\nContent: ${item.body}\n\n`;
+                if (item.front) content += `Prompt: ${item.prompt}\nPerspective: ${item.back}\n\n`;
+                if (item.analysis) content += `Analysis: ${item.analysis}\nWords: ${item.wordCount}\n\n`;
+            });
+        } else if (format === "md") {
+            content = `# WriteCraft Studio Export: ${mode.toUpperCase()}\n\n`;
+            activeDataset.forEach((item, i) => {
+                content += `## Card ${i + 1}\n\n`;
+                if (item.title) content += `### ${item.title}\n\n${item.body}\n\n---\n\n`;
+                if (item.front) content += `**Prompt:** ${item.prompt}\n\n**Perspective:** ${item.back}\n\n---\n\n`;
+                if (item.analysis) content += `**Diagnostic:** ${item.analysis}\n\n- Word Count: ${item.wordCount}\n- Variety: ${item.diversity}\n\n---\n\n`;
+            });
+            mimeType = "text/markdown";
+        } else if (format === "json") {
+            content = JSON.stringify({ mode: mode, items: activeDataset }, null, 2);
+            mimeType = "application/json";
+        } else if (format === "html") {
+            content = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>WriteCraft Export</title><style>body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.6;background:#FFFFFF;color:#1E293B;}.card{background:#F8FAF9;border:1px solid #BBF7D0;border-radius:12px;padding:24px;margin-bottom:20px;}h1,h2,h3{color:#15803D;}</style></head><body><h1>WriteCraft Studio Export (${mode})</h1><hr>${activeDataset.map((it, idx) => `<div class="card"><h2>Item ${idx+1}</h2><p>${it.body || it.back || it.analysis}</p></div>`).join('')}</body></html>`;
+            mimeType = "text/html";
+        }
+
+        const blob = new Blob([content], { type: mimeType });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+    }
+
+    function printStudioContent() {
+        trackStudioEvent('print_export', 'Studio Export', learningModeSelect.value);
+        exportMenu.classList.remove("show");
+        window.print();
+    }
+
+    /* ======================================================
+       FAQ ACCORDION TOGGLE HANDLER
+    ====================================================== */
+    function toggleFaq(button) {
+        const item = button.closest('.faq-item');
+        const isActive = item.classList.contains('active');
+        
+        // Close other items
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+        
+        // Toggle selected item
+        if (!isActive) {
+            item.classList.add('active');
+            trackStudioEvent('toggle_faq', 'FAQ Section', button.querySelector('span').innerText);
+        }
+    }
+
+    /* ======================================================
+       CONTACT FORM SUBMISSION HANDLER
+    ====================================================== */
+    function handleContactSubmit(event) {
+        event.preventDefault();
+        const name = document.getElementById("contactName").value.trim();
+        const email = document.getElementById("contactEmail").value.trim();
+        const msg = document.getElementById("contactMessage").value.trim();
+
+        trackStudioEvent('submit_contact_form', 'Contact Section', `${name} (${email})`);
+
+        const successBox = document.getElementById("contactSuccess");
+        successBox.style.display = "block";
+
+        document.getElementById("contactForm").reset();
+
+        setTimeout(() => {
+            successBox.style.display = "none";
+        }, 5000);
+    }
+</script>
+
+</body>
+</html>
