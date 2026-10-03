@@ -7,9 +7,9 @@
 
     <style>
         :root {
-            /* Crisp White Canvas with Rich Emerald and Forest Green Accents */
-            --bg: #FFFFFF;
-            --surface: #F8FAF9;
+            /* Clean White Canvas with Rich Emerald and Forest Green Accents */
+            --bg: #F4F8F5;
+            --surface: #FFFFFF;
             --surface-elevated: #FFFFFF;
             --surface-light: #EAF3EE;
 
@@ -50,17 +50,17 @@
             scroll-padding-top: 80px;
         }
 
+        /* Rest of the website: Soft aesthetic green background blended with faded white radial glows */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg);
-            /* Centered writing backdrop using your image from assets folder */
+            background-color: #F3F8F5;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.90)),
-                url('assets/background.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
+                radial-gradient(circle at 10% 20%, rgba(209, 250, 229, 0.75) 0%, transparent 40%),
+                radial-gradient(circle at 90% 60%, rgba(187, 247, 208, 0.55) 0%, transparent 45%),
+                radial-gradient(circle at 50% 90%, rgba(220, 252, 231, 0.6) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(244, 249, 245, 0.95) 100%);
             background-attachment: fixed;
+            background-size: cover;
             color: var(--text-secondary);
             line-height: 1.6;
         }
@@ -95,14 +95,21 @@
             padding: 0 24px;
         }
 
-        /* Navigation Header */
+        /* HEADER: Uses pic.jpg as background with an elegant faded white-to-green translucent overlay */
         header {
-            border-bottom: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            background-color: #FFFFFF;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.88), rgba(240, 253, 244, 0.92)),
+                url('assets/pic.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(15, 81, 50, 0.05);
         }
 
         nav {
@@ -111,13 +118,13 @@
             justify-content: center;
             align-items: center;
             gap: 12px;
-            padding: 18px 0;
+            padding: 16px 0;
             text-align: center;
         }
 
         .logo {
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             color: var(--green-dark);
             letter-spacing: -0.5px;
             text-decoration: none;
@@ -125,6 +132,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
         }
 
         .logo-icon {
@@ -137,6 +145,7 @@
             color: var(--green-primary);
             border-radius: 8px;
             font-size: 1.1rem;
+            box-shadow: 0 2px 6px rgba(15, 81, 50, 0.1);
         }
 
         .logo span {
@@ -156,26 +165,30 @@
         .nav-links a {
             text-decoration: none;
             color: var(--text-secondary);
-            font-weight: 600;
+            font-weight: 650;
             font-size: 0.92rem;
             transition: color 0.2s;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
 
         .nav-links a:hover {
             color: var(--green-primary);
+            background: rgba(255, 255, 255, 0.7);
         }
 
         .nav-contact-pill {
-            padding: 5px 14px;
-            background: var(--green-soft);
+            padding: 6px 16px !important;
+            background: var(--green-soft) !important;
             color: var(--green-dark) !important;
-            border-radius: 999px;
+            border-radius: 999px !important;
             border: 1px solid var(--green-border);
             font-weight: 700 !important;
+            box-shadow: var(--shadow-sm);
         }
 
         .nav-contact-pill:hover {
-            background: var(--green-primary);
+            background: var(--green-primary) !important;
             color: #FFFFFF !important;
         }
 
@@ -217,7 +230,8 @@
         .secondary {
             border: 2px solid var(--green-border);
             color: var(--green-dark);
-            background: var(--surface-light);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(6px);
         }
 
         .secondary:hover:not(:disabled) {
@@ -241,6 +255,7 @@
             font-size: 0.8rem;
             display: inline-block;
             margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
         }
 
         .section-title {
@@ -283,7 +298,7 @@
             border-radius: 28px;
             overflow: hidden;
             height: 400px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--green-border);
             box-shadow: var(--shadow-lg);
             background: #FFFFFF;
         }
@@ -328,13 +343,13 @@
         }
 
         .idea-box {
-            background: rgba(234, 243, 238, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid var(--green-border);
             color: var(--text-primary);
             padding: 40px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-sm);
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
         }
 
         .idea-box h3 {
@@ -427,12 +442,13 @@
         }
 
         .step-card {
-            background: rgba(248, 250, 249, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             padding: 24px;
             border-radius: var(--radius-md);
-            border: 1px solid var(--border);
+            border: 1px solid var(--green-border);
             backdrop-filter: blur(6px);
             transition: transform 0.2s, border-color 0.2s;
+            box-shadow: var(--shadow-sm);
         }
 
         .step-card:hover {
@@ -489,12 +505,13 @@
         }
 
         .card {
-            background: rgba(248, 250, 249, 0.9);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--green-border);
             padding: 32px;
             border-radius: var(--radius-md);
             backdrop-filter: blur(6px);
             transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: var(--shadow-sm);
         }
 
         .card:hover {
@@ -516,13 +533,13 @@
            WRITECRAFT INTERACTIVE STUDIO WIDGET
         ====================================================== */
         .studio-widget {
-            background: rgba(248, 250, 249, 0.95);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--green-border);
             border-radius: var(--radius-lg);
             padding: 28px;
             margin-top: 24px;
             box-shadow: var(--shadow-md);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
 
         .studio-grid {
@@ -616,7 +633,7 @@
             padding: 14px;
             border-radius: 12px;
             border: 1px solid var(--border);
-            background: var(--surface-elevated);
+            background: #FAFCFA;
             color: var(--text-primary);
             font-family: inherit;
             font-size: 0.9rem;
@@ -627,6 +644,7 @@
         .studio-textarea:focus {
             outline: none;
             border-color: var(--green-primary);
+            background: #FFFFFF;
         }
 
         .studio-textarea::placeholder {
@@ -656,6 +674,7 @@
             flex-direction: column;
             background: #FFFFFF;
             position: relative;
+            box-shadow: var(--shadow-sm);
         }
 
         .studio-top-controls {
@@ -685,7 +704,7 @@
             padding: 8px 14px;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border);
-            background: var(--surface);
+            background: #FAFCFA;
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-primary);
@@ -705,7 +724,7 @@
             font-weight: 600;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border);
-            background: var(--surface);
+            background: #FAFCFA;
             color: var(--text-secondary);
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
@@ -726,7 +745,7 @@
             height: 38px;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border);
-            background: var(--surface);
+            background: #FAFCFA;
             color: var(--green-dark);
             font-size: 1.25rem;
             line-height: 1;
@@ -962,7 +981,7 @@
         }
 
         .stat-badge {
-            background: var(--surface);
+            background: #FAFCFA;
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             padding: 10px;
@@ -1010,7 +1029,7 @@
             padding: 8px 16px;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border);
-            background: var(--surface);
+            background: #FAFCFA;
             color: var(--text-secondary);
             font-weight: bold;
             cursor: pointer;
@@ -1048,7 +1067,7 @@
             height: 28px;
             border-radius: 6px;
             border: 1px solid var(--border);
-            background: var(--surface);
+            background: #FAFCFA;
             color: var(--text-secondary);
             font-size: 0.75rem;
             font-weight: 700;
@@ -1081,7 +1100,7 @@
 
         .article-card {
             background: rgba(255, 255, 255, 0.94);
-            border: 1px solid var(--border);
+            border: 1px solid var(--green-border);
             border-radius: var(--radius-md);
             padding: 28px;
             box-shadow: var(--shadow-sm);
@@ -1141,10 +1160,11 @@
         }
 
         .glossary-card {
-            background: rgba(248, 250, 249, 0.94);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid var(--green-border);
             border-radius: var(--radius-md);
             padding: 22px;
+            box-shadow: var(--shadow-sm);
         }
 
         .glossary-card h4 {
@@ -1175,7 +1195,7 @@
 
         .faq-item {
             background: rgba(255, 255, 255, 0.94);
-            border: 1px solid var(--border);
+            border: 1px solid var(--green-border);
             border-radius: var(--radius-md);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
@@ -1226,9 +1246,10 @@
            CONTACT US SECTION & FORM
         ====================================================== */
         .contact-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.85);
+            border-top: 1px solid var(--green-border);
+            border-bottom: 1px solid var(--green-border);
+            backdrop-filter: blur(8px);
         }
 
         .contact-grid {
@@ -1240,10 +1261,11 @@
         }
 
         .contact-info-panel {
-            background: var(--surface-light);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid var(--green-border);
             border-radius: var(--radius-md);
             padding: 32px;
+            box-shadow: var(--shadow-sm);
         }
 
         .contact-info-panel h3 {
@@ -1274,7 +1296,7 @@
 
         .contact-form {
             background: #FFFFFF;
-            border: 1px solid var(--border);
+            border: 1px solid var(--green-border);
             border-radius: var(--radius-md);
             padding: 32px;
             box-shadow: var(--shadow-sm);
@@ -1302,7 +1324,7 @@
             font-family: inherit;
             font-size: 0.95rem;
             color: var(--text-primary);
-            background: var(--surface);
+            background: #FAFCFA;
             transition: border-color 0.15s ease;
         }
 
@@ -1342,12 +1364,13 @@
         }
 
         .matter-card {
-            background: rgba(248, 250, 249, 0.9);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--green-border);
             border-radius: 18px;
             padding: 32px;
             backdrop-filter: blur(6px);
             transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: var(--shadow-sm);
         }
 
         .matter-card:hover {
@@ -1374,7 +1397,7 @@
         }
 
         .research-banner {
-            background: rgba(234, 243, 238, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid var(--green-border);
             border-radius: 16px;
             padding: 24px 30px;
@@ -1382,6 +1405,7 @@
             align-items: center;
             gap: 20px;
             backdrop-filter: blur(6px);
+            box-shadow: var(--shadow-sm);
         }
 
         .banner-badge {
@@ -1405,7 +1429,7 @@
         .resources-shelf {
             margin-top: 50px;
             padding-top: 36px;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--green-border);
             text-align: center;
         }
 
@@ -1455,9 +1479,9 @@
         footer {
             text-align: center;
             padding: 40px 20px;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--green-border);
             color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.92);
         }
 
         .footer-links {
@@ -1569,7 +1593,7 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- Navigation Header with Contact Link -->
+<!-- Navigation Header with pic.jpg background and Contact Link -->
 <header>
     <div class="container">
         <nav aria-label="Main Navigation">
@@ -1928,7 +1952,7 @@
     <!-- ======================================================
          GLOSSARY: THE METRICS OF COMPOSITION
     ====================================================== -->
-    <section id="glossary" style="background: rgba(248, 250, 249, 0.7); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <section id="glossary" style="background: rgba(255, 255, 255, 0.7); border-top: 1px solid var(--green-border); border-bottom: 1px solid var(--green-border);">
         <div class="container">
             <span class="section-label">KEY TERMS</span>
             <h2 class="section-title">Writing Diagnostics Glossary</h2>
@@ -1944,7 +1968,7 @@
                     <p>The practice of relying on automated tools to carry mental labor (outlining, ideation, syntax) rather than exercising internal critical reasoning.</p>
                 </div>
                 <div class="glossary-card">
-                    <h4><span>⚖️</span> The Confidence Gap</h4>
+                    <h4><span>⚖️️</span> The Confidence Gap</h4>
                     <p>The psychological disparity where a writer scores well with AI assistance but experiences acute anxiety when tasked with composing an essay unassisted.</p>
                 </div>
                 <div class="glossary-card">
