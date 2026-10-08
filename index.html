@@ -180,21 +180,6 @@
             background: rgba(255, 255, 255, 0.7);
         }
 
-        .nav-contact-pill {
-            padding: 6px 16px !important;
-            background: var(--green-soft) !important;
-            color: var(--green-dark) !important;
-            border-radius: 999px !important;
-            border: 1px solid var(--green-border);
-            font-weight: 700 !important;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .nav-contact-pill:hover {
-            background: var(--green-primary) !important;
-            color: #FFFFFF !important;
-        }
-
         /* Button System */
         .btn {
             display: inline-flex;
@@ -1240,114 +1225,6 @@
             transform: rotate(45deg);
         }
 
-        /* ======================================================
-           CONTACT US SECTION & FORM
-        ====================================================== */
-        .contact-section {
-            background: rgba(255, 255, 255, 0.85);
-            border-top: 1px solid var(--green-border);
-            border-bottom: 1px solid var(--green-border);
-            backdrop-filter: blur(8px);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.25fr;
-            gap: 40px;
-            align-items: start;
-            margin-top: 30px;
-        }
-
-        .contact-info-panel {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid var(--green-border);
-            border-radius: var(--radius-md);
-            padding: 32px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .contact-info-panel h3 {
-            color: var(--green-dark);
-            font-size: 1.35rem;
-            margin-bottom: 12px;
-        }
-
-        .contact-methods {
-            list-style: none;
-            margin-top: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .contact-method-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 0.95rem;
-        }
-
-        .contact-icon {
-            font-size: 1.25rem;
-            line-height: 1;
-        }
-
-        .contact-form {
-            background: #FFFFFF;
-            border: 1px solid var(--green-border);
-            border-radius: var(--radius-md);
-            padding: 32px;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .form-row {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-row label {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--green-dark);
-        }
-
-        .form-input, .form-textarea {
-            padding: 12px 14px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            font-family: inherit;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            background: #FAFCFA;
-            transition: border-color 0.15s ease;
-        }
-
-        .form-input:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--green-primary);
-            background: #FFFFFF;
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 130px;
-        }
-
-        .contact-success-msg {
-            display: none;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            background: var(--green-soft);
-            color: var(--green-dark);
-            font-size: 0.9rem;
-            font-weight: 700;
-            border: 1px solid var(--green-border);
-        }
-
         /* Insights & Why It Matters */
         .future-header {
             max-width: 780px;
@@ -1526,9 +1403,6 @@
             .glossary-grid {
                 grid-template-columns: 1fr 1fr;
             }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
@@ -1591,7 +1465,7 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- Navigation Header with pic.jpg background and Contact Link -->
+<!-- Navigation Header with pic.jpg background -->
 <header>
     <div class="container">
         <nav aria-label="Main Navigation">
@@ -1608,7 +1482,6 @@
                 <li><a href="#glossary">Glossary</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#insights">Why It Matters</a></li>
-                <li><a href="#contact" class="nav-contact-pill">Contact Us ✉️</a></li>
             </ul>
         </nav>
     </div>
@@ -1783,7 +1656,7 @@
 
                         <div id="statusMessage" class="status-box" role="alert"></div>
                         <button type="button" class="btn primary" id="generateBtn" onclick="handleGenerateAction()" title="Generate Visual Output">
-                            <span>✏</span> Generate Visual Output
+                            <span>✏️</span> Generate Visual Output
                         </button>
                     </div>
 
@@ -1952,7 +1825,7 @@
                     <p>The practice of relying on automated tools to carry mental labor (outlining, ideation, syntax) rather than exercising internal critical reasoning.</p>
                 </div>
                 <div class="glossary-card">
-                    <h4><span>⚖</span> The Confidence Gap</h4>
+                    <h4><span>⚖️</span> The Confidence Gap</h4>
                     <p>The psychological disparity where a writer scores well with AI assistance but experiences acute anxiety when tasked with composing an essay unassisted.</p>
                 </div>
                 <div class="glossary-card">
@@ -2014,77 +1887,6 @@
                         <p>WriteCraft analyzes the ratio of distinct lemmas against the total word count, evaluates average sentence length, and flags syntactic repetition. It highlights whether your piece reflects organic human variation or the balanced neutrality characteristic of automated text.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ======================================================
-         CONTACT US SECTION
-    ====================================================== -->
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <span class="section-label">GET IN TOUCH</span>
-            <h2 class="section-title">Contact the WriteCraft Team</h2>
-            <p class="section-lead">Have questions about essay diagnostics, feedback algorithms, or suggestions to improve the learning studio? Send us a note below.</p>
-
-            <div class="contact-grid">
-                <!-- Left Details Box -->
-                <div class="contact-info-panel">
-                    <h3>We'd love to hear from you</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
-                        Whether you are an educator evaluating hybrid AI policies, a student developing your writing portfolio, or an independent writer, our team is open to ideas and feedback.
-                    </p>
-
-                    <ul class="contact-methods">
-                        <li class="contact-method-item">
-                            <span class="contact-icon">📍</span>
-                            <div>
-                                <strong>Location:</strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;">Manila, Metro Manila, Philippines</p>
-                            </div>
-                        </li>
-                        <li class="contact-method-item">
-                            <span class="contact-icon">📧</span>
-                            <div>
-                                <strong>Email:</strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;">writecraft.learning@gmail.com</p>
-                            </div>
-                        </li>
-                        <li class="contact-method-item">
-                            <span class="contact-icon">⚡</span>
-                            <div>
-                                <strong>Response Time:</strong>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;">Typically within 24–48 hours</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Right Form Box -->
-                <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
-                    <div class="form-row">
-                        <label for="contactName">Your Name</label>
-                        <input type="text" id="contactName" class="form-input" placeholder="e.g. Inaki Castasus" required>
-                    </div>
-
-                    <div class="form-row">
-                        <label for="contactEmail">Email Address</label>
-                        <input type="email" id="contactEmail" class="form-input" placeholder="name@example.com" required>
-                    </div>
-
-                    <div class="form-row">
-                        <label for="contactMessage">Your Message or Feedback</label>
-                        <textarea id="contactMessage" class="form-textarea" placeholder="Share your suggestions, classroom use case, or questions about the writing studio..." required></textarea>
-                    </div>
-
-                    <div id="contactSuccess" class="contact-success-msg">
-                        ✓ Thank you! Your message has been received. We'll be in touch soon.
-                    </div>
-
-                    <button type="submit" class="btn primary" style="align-self: flex-start;">
-                        <span>✉️</span> Send Message
-                    </button>
-                </form>
             </div>
         </div>
     </section>
@@ -2166,7 +1968,7 @@
 
 </main>
 
-<!-- Footer with Contact Link -->
+<!-- Footer -->
 <footer>
     <div class="container">
         <ul class="footer-links">
@@ -2174,7 +1976,7 @@
             <li><a href="#studio">Studio</a></li>
             <li><a href="#articles">Articles</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#insights">Why It Matters</a></li>
         </ul>
         <p>WriteCraft • An Interactive Platform for Writers, Thinkers, and Researchers</p>
         <p class="footer-note">Designed to cultivate independent thought alongside modern generative tools.</p>
@@ -2635,27 +2437,6 @@
             item.classList.add('active');
             trackStudioEvent('toggle_faq', 'FAQ Section', button.querySelector('span').innerText);
         }
-    }
-
-    /* ======================================================
-       CONTACT FORM SUBMISSION HANDLER
-    ====================================================== */
-    function handleContactSubmit(event) {
-        event.preventDefault();
-        const name = document.getElementById("contactName").value.trim();
-        const email = document.getElementById("contactEmail").value.trim();
-        const msg = document.getElementById("contactMessage").value.trim();
-
-        trackStudioEvent('submit_contact_form', 'Contact Section', `${name} (${email})`);
-
-        const successBox = document.getElementById("contactSuccess");
-        successBox.style.display = "block";
-
-        document.getElementById("contactForm").reset();
-
-        setTimeout(() => {
-            successBox.style.display = "none";
-        }, 5000);
     }
 </script>
 
